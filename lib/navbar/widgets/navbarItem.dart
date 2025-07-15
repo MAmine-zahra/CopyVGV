@@ -88,3 +88,39 @@ class SideSubItem extends StatelessWidget {
     );
   }
 }
+class HomeButton extends StatelessWidget {
+  final String title;
+  final VoidCallback? onTap;
+  const HomeButton({
+    super.key,
+    required this.title,
+    this.onTap,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
+        child:
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.blue[700],
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          width: 300,
+          child: Center( // <-- Center the text
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -28,7 +28,7 @@ class CustomNavbar extends StatelessWidget{
             childrens: [
               SideSubItem(
                 title: "Our Philosophy",
-                onTap: () => onItemSelected?.call(const WelcomeContent()),
+                onTap: () => onItemSelected?.call(const OurPhilosophy()),
               ),
               SideSubItem(
                 title: "Conventions",

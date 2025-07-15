@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'navbarItem.dart';
 
 //Very Good Engineering Pages
 
-//Our Philosophy
+//Welcome Content
 class WelcomeContent extends StatelessWidget{
-  const WelcomeContent({super.key});
+  final void Function(Widget)? onItemSelected;
+  const WelcomeContent({super.key, this.onItemSelected});
   @override
   Widget build(BuildContext context){
     return Center(
@@ -12,18 +14,38 @@ class WelcomeContent extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Welcome to Very Good Engineering',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 16),
           Text(
             'Select an item from the sidebar to learn more',
             style: TextStyle(color: Colors.white70),
+          ),
+          HomeButton(
+            title: "View Our Philosophy",
+            onTap: () => onItemSelected?.call(const OurPhilosophy()),
           )
         ],
+      ),
+    );
+  }
+}
+
+
+
+//Our Philosophy
+class OurPhilosophy extends StatelessWidget {
+  const OurPhilosophy({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Our Philosophy Page',
+        style: TextStyle(color: Colors.white, fontSize: 24),
       ),
     );
   }

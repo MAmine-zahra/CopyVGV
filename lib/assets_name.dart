@@ -5,7 +5,6 @@ const String vgvLogo ='assets/images/very_good_ventures_logo.jpg';
 
 //Sidebar Icons
 
-
 const String veryGoodEngineering="🦄";
 const String architecture="🏛️";
 const String automation="🦾";

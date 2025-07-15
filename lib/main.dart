@@ -59,7 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(4.0),
-          child: Image.asset(vgvLogo),
+          child: GestureDetector(
+            onTap: () => _updateContent(const WelcomeContent()),
+            child: Image.asset(vgvLogo),
+          ),
         ),
         toolbarHeight: 64,
         title: Row(
@@ -88,11 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
             onItemSelected: _updateContent,
             activeItemId: _activeSubItemId
           ),
-
           Expanded(
             child: Container(
               color: Color.fromARGB(255, 33, 38, 51),
-              child: _currentContent
+              child: _currentContent is WelcomeContent
+                ? WelcomeContent(onItemSelected: _updateContent)
+                : _currentContent,
             ),
           ),
           Container(
