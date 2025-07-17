@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'Features/navbar/widgets/welcome_content.dart';
 import 'assets_name.dart';
-import 'navbar/navbar.dart';
-import 'navbar/widgets/content_widgets.dart';
+import 'Features/navbar/navbar.dart';
 
 void main() {
   runApp(const MyApp());

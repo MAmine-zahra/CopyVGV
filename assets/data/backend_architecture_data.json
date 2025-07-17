@@ -1,0 +1,103 @@
+{
+  "mainTitle": "Backend Architecture",
+  "content": [
+    {
+      "type": "text",
+      "text": "Loose coupling, separation of concerns and layered architecture should not only be applied to frontend development. These principles can also be applied during backend development. For example, concepts such as route navigation, data access, data processing and data models can be separated and tested in isolation."
+    },
+    {
+      "type": "text",
+      "text": "Note Text"
+    },
+    {
+      "type": "subtitle",
+      "text": "Project Structure"
+    },
+    {
+      "type": "text",
+      "text": "Putting the backend in the same repository as the frontend allows developers to easily import data models from the backend. Within the backend directory, developers should consider separating the following elements into dedicated directories:"
+    },
+    {
+      "type": "bulletPoints",
+      "points": [
+        "Middle Ware Providers",
+        "Routes",
+        "Data access",
+        "Data models",
+        "Tests"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "While providers, routes, and tests, can live in the root backend project, consider putting data models and data access into their own dedicated package(s). Ideally, these layers should be able to exist independently from the rest of the app."
+    },
+    {
+      "type": "text",
+      "text": "Folder Tree"
+    },
+    {
+      "type": "subtitle",
+      "text": "Models"
+    },
+    {
+      "type": "text",
+      "text": "A models package should clearly define the necessary data models that the backend will be sharing with the frontend. Defining endpoint models makes the data necessary to communicate between frontend and backend more explicit. It also creates a data structure that can communicate additional metadata about content received, such as the total count of items and pagination information."
+    },
+    {
+      "type": "text",
+      "text": "Code Widget"
+    },
+    {
+      "type": "text",
+      "text": "Note Text"
+    },
+    {
+      "type": "subtitle",
+      "text": "Data Access"
+    },
+    {
+      "type": "text",
+      "text": "A data source package should allow developers to fetch data from different sources. Similar to the data layer on the frontend, this package should abstract the work of fetching data and providing it to the API routes. This allows for easy development by mocking data in an in-memory source when necessary, or also creating different data sources for different environments."
+    },
+    {
+      "type": "text",
+      "text": "The best way to achieve this is by making an abstract data source with the necessary CRUD methods, and implementing this data source as needed based on where the data is coming from."
+    },
+    {
+      "type": "text",
+      "text": "Code Widget"
+    },
+    {
+      "type": "subtitle",
+      "text": "Routes"
+    },
+    {
+      "type": "text",
+      "text": "Routes should follow common best practices for REST API design"
+    },
+    {
+      "type": "subtitle",
+      "text": "Endpoint Should Have Descriptive Paths"
+    },
+    {
+      "type": "text",
+      "text": "Endpoints should be named for the collection of objects that they provide access to. Use plural nouns to specify the collection, not the individual entity."
+    },
+    {
+      "type": "subtitle",
+      "text": "Use Query Parameters to Filter Properties of GET results"
+    },
+    {
+      "type": "text",
+      "text": "Query parameters serve as the standard way of filtering the results of a GET request."
+    },
+    {
+      "type": "subtitle",
+      "text": "Map the Request Body of POST, PUT, and PATCH Requests"
+    },
+    {
+      "type": "text",
+      "text": "On requests to the server to create or update items, endpoints should take a stringified JSON body and decode it into a map so that the appropriate entity in the data source is changed. Since this is a common process for all create/update requests, consider adding a utility to map the request body."
+    }
+  ]
+}
