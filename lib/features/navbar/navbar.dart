@@ -20,14 +20,14 @@ import 'package:new_app/Features/navbar/widgets/testing/testing_overview.dart';
 import 'package:new_app/Features/navbar/widgets/theming/theming.dart';
 import 'package:new_app/Features/navbar/widgets/widgets/layouts.dart';
 import 'package:new_app/Features/navbar/widgets/widgets/widgets.dart';
-import 'package:new_app/Features/navbar/widgets/bloc_event_transformers.dart';
+import 'package:new_app/Features/navbar/widgets/state_management/bloc_event_transformers.dart';
 import 'package:new_app/Features/navbar/widgets/very_good_engineering/contributing.dart';
 import 'package:new_app/Features/navbar/widgets/very_good_engineering/conventions.dart';
 import 'package:new_app/Features/navbar/widgets/very_good_engineering/credits.dart';
 import 'package:new_app/Features/navbar/widgets/very_good_engineering/glossary.dart';
 import 'package:new_app/Features/navbar/widgets/very_good_engineering/our_philosophy.dart';
 import 'package:new_app/Features/navbar/widgets/very_good_engineering/services.dart';
-import 'widgets/navbar_item.dart';
+import 'widgets/reusable_widgets/navbar_item.dart';
 import 'package:new_app/assets_name.dart';
 
 class CustomNavbar extends StatelessWidget {

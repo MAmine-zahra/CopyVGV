@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/Features/navbar/widgets/text_placers.dart';
+import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
 
 class SubsectionWidget extends StatelessWidget {
   final String? subtitle;
@@ -14,7 +14,6 @@ class SubsectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO : add any component here as a parameter
     return Column(
       children: [
         subtitle == null ? SizedBox.shrink() : ContentSubtitle(text: subtitle!),

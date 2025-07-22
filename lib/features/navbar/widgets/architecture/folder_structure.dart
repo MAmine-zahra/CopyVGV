@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../tree_view.dart';
+import '../reusable_widgets/tree_view.dart';
 
 class FolderStructureWidget extends StatelessWidget {
   const FolderStructureWidget({super.key});

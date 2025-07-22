@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:new_app/Features/navbar/widgets/subsection_widget.dart';
-import 'package:new_app/Features/navbar/widgets/text_placers.dart';
-import 'package:new_app/features/navbar/widgets/code_widget.dart';
+import 'package:new_app/Features/navbar/widgets/reusable_widgets/subsection_widget.dart';
+import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/code_widget.dart';
 import '../../domain/backend_architecture_models.dart';
 import 'folder_structure.dart';
 
