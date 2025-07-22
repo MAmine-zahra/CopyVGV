@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/Features/navbar/widgets/Architecture/architecture.dart';
-import 'package:new_app/Features/navbar/widgets/Architecture/backend_architecture.dart';
-import 'package:new_app/Features/navbar/widgets/Architecture/barrel_files.dart';
-import 'package:new_app/Features/navbar/widgets/Automation/cicd.dart';
-import 'package:new_app/Features/navbar/widgets/Code%20Review/code_reviews.dart';
-import 'package:new_app/Features/navbar/widgets/Code%20Style/code_style.dart';
-import 'package:new_app/Features/navbar/widgets/Documentation/documentation.dart';
-import 'package:new_app/Features/navbar/widgets/Error%20Handling/error_handling.dart';
-import 'package:new_app/Features/navbar/widgets/Examples/airplane_entertainment_system.dart';
-import 'package:new_app/Features/navbar/widgets/Examples/financial_dashboard.dart';
-import 'package:new_app/Features/navbar/widgets/Examples/vehicule_cockpit.dart';
-import 'package:new_app/Features/navbar/widgets/Internalization/localization.dart';
-import 'package:new_app/Features/navbar/widgets/Internalization/text_directionality.dart';
-import 'package:new_app/Features/navbar/widgets/Navigation/routing_overview.dart';
-import 'package:new_app/Features/navbar/widgets/Security/security_mobile_apps.dart';
-import 'package:new_app/Features/navbar/widgets/State%20Management/state_handling.dart';
-import 'package:new_app/Features/navbar/widgets/Testing/golden_file_testing.dart';
-import 'package:new_app/Features/navbar/widgets/Testing/testing_overview.dart';
-import 'package:new_app/Features/navbar/widgets/Theming/theming.dart';
-import 'package:new_app/Features/navbar/widgets/Widgets/layouts.dart';
-import 'package:new_app/Features/navbar/widgets/Widgets/widgets.dart';
+import 'package:new_app/Features/navbar/widgets/architecture/architecture.dart';
+import 'package:new_app/Features/navbar/widgets/architecture/backend_architecture.dart';
+import 'package:new_app/Features/navbar/widgets/architecture/barrel_files.dart';
+import 'package:new_app/Features/navbar/widgets/automation/cicd.dart';
+import 'package:new_app/Features/navbar/widgets/code_review/code_reviews.dart';
+import 'package:new_app/Features/navbar/widgets/code_style/code_style.dart';
+import 'package:new_app/Features/navbar/widgets/documentation/documentation.dart';
+import 'package:new_app/Features/navbar/widgets/error_handling/error_handling.dart';
+import 'package:new_app/Features/navbar/widgets/examples/airplane_entertainment_system.dart';
+import 'package:new_app/Features/navbar/widgets/examples/financial_dashboard.dart';
+import 'package:new_app/Features/navbar/widgets/examples/vehicule_cockpit.dart';
+import 'package:new_app/Features/navbar/widgets/internalization/localization.dart';
+import 'package:new_app/Features/navbar/widgets/internalization/text_directionality.dart';
+import 'package:new_app/Features/navbar/widgets/navigation/routing_overview.dart';
+import 'package:new_app/Features/navbar/widgets/security/security_mobile_apps.dart';
+import 'package:new_app/Features/navbar/widgets/state_management/state_handling.dart';
+import 'package:new_app/Features/navbar/widgets/testing/golden_file_testing.dart';
+import 'package:new_app/Features/navbar/widgets/testing/testing_overview.dart';
+import 'package:new_app/Features/navbar/widgets/theming/theming.dart';
+import 'package:new_app/Features/navbar/widgets/widgets/layouts.dart';
+import 'package:new_app/Features/navbar/widgets/widgets/widgets.dart';
 import 'package:new_app/Features/navbar/widgets/bloc_event_transformers.dart';
-import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/contributing.dart';
-import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/conventions.dart';
-import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/credits.dart';
-import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/glossary.dart';
-import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/our_philosophy.dart';
-import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/services.dart';
+import 'package:new_app/Features/navbar/widgets/very_good_engineering/contributing.dart';
+import 'package:new_app/Features/navbar/widgets/very_good_engineering/conventions.dart';
+import 'package:new_app/Features/navbar/widgets/very_good_engineering/credits.dart';
+import 'package:new_app/Features/navbar/widgets/very_good_engineering/glossary.dart';
+import 'package:new_app/Features/navbar/widgets/very_good_engineering/our_philosophy.dart';
+import 'package:new_app/Features/navbar/widgets/very_good_engineering/services.dart';
 import 'widgets/navbar_item.dart';
 import 'package:new_app/assets_name.dart';
 
@@ -140,10 +140,10 @@ class CustomNavbar extends StatelessWidget {
             ),
             SideMainItem(
               icon: errorHandling,
-              title: "Error Handling",
+              title: "error_handling",
               childrens: [
                 SideSubItem(
-                  title: "Error Handling",
+                  title: "error_handling",
                   onTap: () =>
                       onItemSelected?.call(const ErrorHandlingContent()),
                 ),
@@ -186,7 +186,7 @@ class CustomNavbar extends StatelessWidget {
             ),
             SideMainItem(
               icon: navigation,
-              title: "Navigation",
+              title: "navigation",
               childrens: [
                 SideSubItem(
                   title: "Routing Overview",

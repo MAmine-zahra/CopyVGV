@@ -5,7 +5,7 @@ class ErrorHandlingContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'Error Handling Page',
+        'error_handling Page',
         style: TextStyle(color: Colors.white, fontSize: 24),
       ),
     );

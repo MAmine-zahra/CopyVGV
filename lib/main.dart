@@ -41,11 +41,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   Widget _currentContent = const WelcomeContent();
   String? _activeSubItemId;
 
-  void _incrementCounter() => setState(() => _counter++);
   void _updateContent(Widget content,) {
     setState(() {
       _currentContent = content;
@@ -109,10 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        child: const Icon(Icons.add),
       ),
     );
   }

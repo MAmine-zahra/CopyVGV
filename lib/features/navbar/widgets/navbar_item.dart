@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Side Navigation Bar Item
+// Side navigation Bar Item
 class SideMainItem extends StatefulWidget {
   final String icon;
   final String title;
