@@ -32,8 +32,7 @@
       "text": "While providers, routes, and tests, can live in the root backend project, consider putting data models and data access into their own dedicated package(s). Ideally, these layers should be able to exist independently from the rest of the app."
     },
     {
-      "type": "text",
-      "text": "Folder Tree"
+      "type": "folderStructure"
     },
     {
       "type": "subtitle",

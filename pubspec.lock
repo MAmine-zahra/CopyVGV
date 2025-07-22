@@ -240,6 +240,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
+  tree_view:
+    dependency: "direct main"
+    description:
+      name: tree_view
+      sha256: "867c46786b6d8222c9fc4a754c29e43da3b5e6aa022dc18979d24fb7d9303624"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   typed_data:
     dependency: transitive
     description:

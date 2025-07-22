@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_app/Features/navbar/widgets/subsection_widget.dart';
 import 'package:new_app/Features/navbar/widgets/text_placers.dart';
-
 import '../../domain/backend_architecture_models.dart';
+import '../tree_view.dart';
 
 class ArchitectureContent extends StatelessWidget {
   const ArchitectureContent({super.key});
@@ -17,7 +16,6 @@ class ArchitectureContent extends StatelessWidget {
     final Map<String, dynamic> jsonData = json.decode(response);
     return BackendArchitectureModel.fromJson(jsonData);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +45,50 @@ class ArchitectureContent extends StatelessWidget {
                   return SubsectionWidget(textItems: [item.text ?? '_']);
                 case "bulletPoints":
                   return SubsectionWidget(bulletPoints: item.points ?? []);
+                case "folderStructure":
+                  return FolderStructureWidget();
                 default:
                   return const SizedBox.shrink();
               }
             }),
           );
         },
+      ),
+    );
+  }
+}
+
+class FolderStructureWidget extends StatelessWidget {
+  const FolderStructureWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 1, 22, 39),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FolderWidget(
+            name: "api/",
+            children: [
+              FolderWidget(
+                name: "routes/",
+                children: [
+                  FolderWidget(
+                    name: "api/",
+                    children: [
+                      FolderWidget(
+                        name: "v1/",
+                        children: [FolderWidget(name: "todos/")],
+                      ),
+                      FileWidget(name: "_middleware.dart"),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
