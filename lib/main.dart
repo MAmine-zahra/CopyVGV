@@ -93,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             child: Container(
+              padding: EdgeInsets.only(left: 200),
               color: Color.fromARGB(255, 33, 38, 51),
               child: _currentContent is WelcomeContent
                 ? WelcomeContent(onItemSelected: _updateContent)

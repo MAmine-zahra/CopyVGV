@@ -25,8 +25,9 @@ class Content {
   String? type;
   String? text;
   List<String>? points;
+  String? code;
 
-  Content({this.type, this.text, this.points});
+  Content({this.type, this.text, this.points, this.code});
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
@@ -35,14 +36,17 @@ class Content {
       points: (json['points'] is List)
           ? List<String>.from(json['points'] as List)
           : null,
+      code: json['code'] as String?,
     );
   }
+
 
   Map<String, dynamic> toJson() {
     return {
       'type': type,
       'text': text,
       'points': points,
+      'code': code,
     };
   }
 }

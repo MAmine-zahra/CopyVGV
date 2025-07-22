@@ -43,8 +43,8 @@
       "text": "A models package should clearly define the necessary data models that the backend will be sharing with the frontend. Defining endpoint models makes the data necessary to communicate between frontend and backend more explicit. It also creates a data structure that can communicate additional metadata about content received, such as the total count of items and pagination information."
     },
     {
-      "type": "text",
-      "text": "Code Widget"
+      "type": "code",
+      "code": "final class GetTodosResponse {\n  const GetTodosResponse({\n    int count = 0,\n    int pageNumber = 0,\n    List<Todos> todos = const [],\n  });\n  final int count;\n  final int pageNumber;\n  final List<Todos> todos;\n}"
     },
     {
       "type": "text",
@@ -63,8 +63,8 @@
       "text": "The best way to achieve this is by making an abstract data source with the necessary CRUD methods, and implementing this data source as needed based on where the data is coming from."
     },
     {
-      "type": "text",
-      "text": "Code Widget"
+      "type": "code",
+      "code": "abstract class TodosDataSource {\n  Future<Todo> create({\n    required String name,\n  });\n\n  Future<List<Todo>> getAll();\n\n  Future<Todo?> get(String id);\n\n  Future<Todo> update(String id, Todo todo);\n\n  Future<void> delete(String id);\n}"
     },
     {
       "type": "subtitle",
@@ -83,6 +83,26 @@
       "text": "Endpoints should be named for the collection of objects that they provide access to. Use plural nouns to specify the collection, not the individual entity."
     },
     {
+      "type": "code",
+      "code": "my_api/v1/todos"
+    },
+    {
+      "type": "text",
+      "text": "Nested paths then provide specific data about an individual object within the collection."
+    },
+    {
+      "type": "code",
+      "code": "my_api/v1/todos/1"
+    },
+    {
+      "type": "text",
+      "text": "When setting up a collection of objects that is nested under another collection, the endpoint path should reflect the relationship."
+    },
+    {
+      "type": "code",
+      "code": "my_api/v1/users/123/todos"
+    },
+    {
       "type": "subtitle",
       "text": "Use Query Parameters to Filter Properties of GET results"
     },
@@ -91,12 +111,80 @@
       "text": "Query parameters serve as the standard way of filtering the results of a GET request."
     },
     {
+      "type": "code",
+      "code": "my_api/v1/todos?completed=false"
+    },
+    {
       "type": "subtitle",
       "text": "Map the Request Body of POST, PUT, and PATCH Requests"
     },
     {
       "type": "text",
       "text": "On requests to the server to create or update items, endpoints should take a stringified JSON body and decode it into a map so that the appropriate entity in the data source is changed. Since this is a common process for all create/update requests, consider adding a utility to map the request body."
+    },
+    {
+      "type": "code",
+      "code": "extension RequestBodyDecoder on Request {\n  Future<Map<String, dynamic>> map() async =>\n      Map<String, dynamic>.from(jsonDecode(await body()) as Map);\n}"
+    },
+    {
+      "type": "text",
+      "text": "The request body can then be converted into the correct data model like in the endpoint code."
+    },
+    {
+      "type": "code",
+      "code": "final body = CreateTodoRequest.fromJson(await context.request.map());"
+    },
+    {
+      "type": "subtitle",
+      "text": "Use PATCH to Send Update Requests"
+    },
+    {
+      "type": "text",
+      "text": "For update requests, PATCH is more advisable than PUT because PATCH requests the server to update an existing entity, while PUT requests the entity to be replaced."
+    },
+    {
+      "type": "code",
+      "code": "PATCH my_api/v1/todos/1"
+    },
+    {
+      "type": "subtitle",
+      "text": "DELETE should only require an identifier"
+    },
+    {
+      "type": "text",
+      "text": "DELETE requests should require nothing more than an identifier of the object to be deleted. There is no need to send the entire object."
+    },
+    {
+      "type": "code",
+      "code": "DELETE my_api/v1/todos/1 //Data source should only require the ID"
+    },
+    {
+      "type": "subtitle",
+      "text": "Return Appropriate Status Codes"
+    },
+    {
+      "type": "text",
+      "text": "Routes should also return proper status codes to the frontend based on the results of their operations. When an error occurs, sending a useful status and response to the client makes it clear what happened and allows the client to handle errors more smoothly."
+    },
+    {
+      "type": "code",
+      "code": "final todo = context.read<TodosDataSource>().get(id);\n\nif (todo == null) {\n  return Response(statusCode: HttpStatus.notFound, body: 'No todo exists with the given $id');\n}"
+    },
+    {
+      "type": "text",
+      "text": " "
+    },
+    {
+      "type": "code",
+      "code": "late final requestBody;\ntry {\n  requestBody = CreateTodoRequest.fromJson(jsonDecode(await context.request.body() as Map));\n} catch (e) {\n  return Response(statusCode: HttpStatus.badRequest, body: 'Invalid request: $e');\n}"
+    },
+    {
+      "type": "text",
+      "text": " "
+    },
+    {
+      "type": "code",
+      "code": "try {\n  await someServerSideProcess();\n} catch (e) {\n  return Response(statusCode: HttpStatus.internalServerError, body: 'Server error: $e');\n}"
     }
   ]
 }

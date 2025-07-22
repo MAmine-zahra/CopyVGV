@@ -77,11 +77,14 @@ class SideSubItem extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 16),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: isActive ? Colors.blue[200] : Colors.white70,
-            fontSize: 14.0,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            title,
+            style: TextStyle(
+              color: isActive ? Colors.blue[200] : Colors.white70,
+              fontSize: 14.0,
+            ),
           ),
         ),
       ),

@@ -17,7 +17,7 @@ import 'package:new_app/Features/navbar/widgets/Security/security_mobile_apps.da
 import 'package:new_app/Features/navbar/widgets/State%20Management/state_handling.dart';
 import 'package:new_app/Features/navbar/widgets/Testing/golden_file_testing.dart';
 import 'package:new_app/Features/navbar/widgets/Testing/testing_overview.dart';
-import 'package:new_app/Features/navbar/widgets/Theming/Theming.dart';
+import 'package:new_app/Features/navbar/widgets/Theming/theming.dart';
 import 'package:new_app/Features/navbar/widgets/Widgets/layouts.dart';
 import 'package:new_app/Features/navbar/widgets/Widgets/widgets.dart';
 import 'package:new_app/Features/navbar/widgets/bloc_event_transformers.dart';
@@ -27,7 +27,7 @@ import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/credit
 import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/glossary.dart';
 import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/our_philosophy.dart';
 import 'package:new_app/Features/navbar/widgets/Very%20Good%20Engineering/services.dart';
-import 'widgets/navbarItem.dart';
+import 'widgets/navbar_item.dart';
 import 'package:new_app/assets_name.dart';
 
 class CustomNavbar extends StatelessWidget {

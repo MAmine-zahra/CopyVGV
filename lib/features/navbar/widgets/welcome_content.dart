@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'navbarItem.dart';
+import 'navbar_item.dart';
 import 'Very Good Engineering/our_philosophy.dart';
 class WelcomeContent extends StatelessWidget {
   final void Function(Widget)? onItemSelected;

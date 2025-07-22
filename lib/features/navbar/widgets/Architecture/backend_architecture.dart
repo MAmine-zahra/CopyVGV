@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_app/Features/navbar/widgets/subsection_widget.dart';
 import 'package:new_app/Features/navbar/widgets/text_placers.dart';
+import 'package:new_app/features/navbar/widgets/code_widget.dart';
 import '../../domain/backend_architecture_models.dart';
-import '../tree_view.dart';
+import 'folder_structure.dart';
 
 class ArchitectureContent extends StatelessWidget {
   const ArchitectureContent({super.key});
@@ -47,48 +48,16 @@ class ArchitectureContent extends StatelessWidget {
                   return SubsectionWidget(bulletPoints: item.points ?? []);
                 case "folderStructure":
                   return FolderStructureWidget();
+                case "code":
+                  return CodeBlock(
+                    code: item.code ?? '_',
+                  );
                 default:
                   return const SizedBox.shrink();
               }
             }),
           );
         },
-      ),
-    );
-  }
-}
-
-class FolderStructureWidget extends StatelessWidget {
-  const FolderStructureWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: const Color.fromARGB(255, 1, 22, 39),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FolderWidget(
-            name: "api/",
-            children: [
-              FolderWidget(
-                name: "routes/",
-                children: [
-                  FolderWidget(
-                    name: "api/",
-                    children: [
-                      FolderWidget(
-                        name: "v1/",
-                        children: [FolderWidget(name: "todos/")],
-                      ),
-                      FileWidget(name: "_middleware.dart"),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
