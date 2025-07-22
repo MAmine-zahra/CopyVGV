@@ -6,8 +6,8 @@
       "text": "Loose coupling, separation of concerns and layered architecture should not only be applied to frontend development. These principles can also be applied during backend development. For example, concepts such as route navigation, data access, data processing and data models can be separated and tested in isolation."
     },
     {
-      "type": "text",
-      "text": "Note Text"
+      "type": "note",
+      "note": "There are many languages and frameworks to write backends in. It is important to choose tools and follow patterns that serve business needs and maximize developer efficiency. VGV built Dart Frog for this purpose. Dart Frog provides a number of advantages to developers writing Flutter apps:"
     },
     {
       "type": "subtitle",
@@ -47,8 +47,8 @@
       "code": "final class GetTodosResponse {\n  const GetTodosResponse({\n    int count = 0,\n    int pageNumber = 0,\n    List<Todos> todos = const [],\n  });\n  final int count;\n  final int pageNumber;\n  final List<Todos> todos;\n}"
     },
     {
-      "type": "text",
-      "text": "Note Text"
+      "type": "note",
+      "note": "It is also advisable to automate JSON serialization inside the models package. This can be achieved with the json_serializable package, though experimental macros in Dart offer a potentially cleaner way of doing this in the future."
     },
     {
       "type": "subtitle",

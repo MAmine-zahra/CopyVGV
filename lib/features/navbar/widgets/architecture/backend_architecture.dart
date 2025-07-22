@@ -5,6 +5,7 @@ import 'package:new_app/Features/navbar/widgets/reusable_widgets/subsection_widg
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
 import 'package:new_app/features/navbar/widgets/reusable_widgets/code_widget.dart';
 import '../../domain/backend_architecture_models.dart';
+import '../reusable_widgets/note_widget.dart';
 import 'folder_structure.dart';
 
 class ArchitectureContent extends StatelessWidget {
@@ -49,9 +50,9 @@ class ArchitectureContent extends StatelessWidget {
                 case "folderStructure":
                   return FolderStructureWidget();
                 case "code":
-                  return CodeBlock(
-                    code: item.code ?? '_',
-                  );
+                  return SubsectionWidget(code: item.code ?? '_');
+                case "note":
+                  return SubsectionWidget(note: item.note ?? '_');
                 default:
                   return const SizedBox.shrink();
               }
