@@ -10,6 +10,7 @@ class SubsectionWidget extends StatelessWidget {
   final List<String>? bulletPoints;
   final String? code;
   final String? note;
+  final List<String>? notePoints;
 
   const SubsectionWidget({
     super.key,
@@ -18,6 +19,7 @@ class SubsectionWidget extends StatelessWidget {
     this.bulletPoints,
     this.code,
     this.note,
+    this.notePoints,
   });
 
   @override
@@ -38,7 +40,7 @@ class SubsectionWidget extends StatelessWidget {
             ? SizedBox.shrink()
             : ContentBulletPoints(points: bulletPoints ?? []),
         code == null ? SizedBox.shrink() : CodeBlock(code: code!),
-        note == null ? SizedBox.shrink() : NoteWidget(note: note!),
+        note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? []),
       ],
     );
   }
