@@ -28,8 +28,9 @@ class Content {
   String? code;
   String? note;
   List<String>? notePoints;
+  String? image;
 
-  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints});
+  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image});
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
@@ -43,6 +44,7 @@ class Content {
       notePoints: (json['notePoints'] is List)
           ? List<String>.from(json['notePoints'] as List)
           : null,
+      image: json['image'] as String?,
     );
   }
 
@@ -55,6 +57,7 @@ class Content {
       'code': code,
       'note': note,
       'notePoints': notePoints,
+      'image':image,
     };
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/subsection_widget.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
-import '../../domain/backend_architecture_models.dart';
+import '../../domain/info_json_model.dart';
 import 'folder_structure.dart';
 
 class ArchitectureContent extends StatelessWidget {
@@ -46,7 +46,7 @@ class ArchitectureContent extends StatelessWidget {
                 case "bulletPoints":
                   return SubsectionWidget(bulletPoints: item.points ?? []);
                 case "folderStructure":
-                  return FolderStructureWidget();
+                  return BackArchFolderStructureWidget();
                 case "code":
                   return SubsectionWidget(code: item.code ?? '_');
                 case "note":

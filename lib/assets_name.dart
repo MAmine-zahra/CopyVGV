@@ -1,5 +1,5 @@
 const String vgvLogo ='assets/images/very_good_ventures_logo.jpg';
-
+const String dependencyImage='assets/images/dependency_graph_image';
 
 
 

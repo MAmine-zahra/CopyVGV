@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
 
 import 'code_widget.dart';
+import 'image_widget.dart';
 import 'note_widget.dart';
 
 class SubsectionWidget extends StatelessWidget {
@@ -11,6 +12,7 @@ class SubsectionWidget extends StatelessWidget {
   final String? code;
   final String? note;
   final List<String>? notePoints;
+  final String? image;
 
   const SubsectionWidget({
     super.key,
@@ -20,6 +22,7 @@ class SubsectionWidget extends StatelessWidget {
     this.code,
     this.note,
     this.notePoints,
+    this.image,
   });
 
   @override
@@ -41,7 +44,9 @@ class SubsectionWidget extends StatelessWidget {
             : ContentBulletPoints(points: bulletPoints ?? []),
         code == null ? SizedBox.shrink() : CodeBlock(code: code!),
         note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? []),
+        image == null ? SizedBox.shrink() : ImageWidget(image: image!),
       ],
     );
   }
 }
+

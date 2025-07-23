@@ -18,18 +18,20 @@ class NoteWidget extends StatelessWidget {
               child: Text(
                 'Note:',
                 style: TextStyle(
-
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            Text(
-              note,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                note,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
             SizedBox(height: 8),
