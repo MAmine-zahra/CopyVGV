@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:highlight/highlight.dart' show highlight, Node;
 
 import 'code_widget.dart';
 
@@ -27,22 +26,30 @@ class _ToggleCodeBlockState extends State<ToggleCodeBlock> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            ChoiceChip(
-              label: const Text('Good ✅'),
-              selected: showGood,
-              onSelected: (_) => setState(() => showGood = true),
-              selectedColor: Colors.green[700],
+
+        Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Color.fromARGB(255, 50, 56, 70), width: 3),
             ),
-            const SizedBox(width: 10),
-            ChoiceChip(
-              label: const Text('Bad ❗'),
-              selected: !showGood,
-              onSelected: (_) => setState(() => showGood = false),
-              selectedColor: Colors.red[700],
-            ),
-          ],
+          ),
+          child: Row(
+            children: [
+              ChoiceChip(
+                label: const Text('Good ✅'),
+                selected: showGood,
+                onSelected: (_) => setState(() => showGood = true),
+                selectedColor: Colors.green[700],
+              ),
+              const SizedBox(width: 3),
+              ChoiceChip(
+                label: const Text('Bad ❗'),
+                selected: !showGood,
+                onSelected: (_) => setState(() => showGood = false),
+                selectedColor: Colors.red[700],
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 10),
         CodeBlock(

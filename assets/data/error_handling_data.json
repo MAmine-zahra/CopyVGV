@@ -13,6 +13,19 @@
       "type": "code2",
       "goodCode": "/// Permanently deletes an account with the given [name].\n///\n/// Throws:\n///\n/// * [UnauthorizedException] if the active role is not [Role.admin], since only\n///  admins are authorized to delete accounts.\nvoid deleteAccount(String name) {\n  if (activeRole != Role.admin) {\n    throw UnauthorizedException('Only admin can delete account');\n  }\n  // ...\n}",
       "badCode": "/// Permanently deletes an account with the given [name].\nvoid deleteAccount(String name) {\n  if (activeRole != Role.admin) {\n    throw UnauthorizedException('Only admin can delete account');\n  }\n  // ...\n}"
+    },
+    {
+      "type": "subtitle",
+      "text": "Define descriptive exceptions"
+    },
+    {
+      "type": "text",
+      "text": "Implement Exception with descriptive names rather than simply throwing a generic Exception.\n\nBy creating custom exceptions, developers can provide more meaningful error messages and handle different error types in a more granular way. This enhances code readability and maintainability, as it becomes clear what type of error is being dealt with."
+    },
+    {
+      "type": "code2",
+      "goodCode": "class UnauthorizedException implements Exception {\n  UnauthorizedException(this.message);\n\n  final String message;\n\n  @override\n  String toString() => 'UnauthorizedException: $message';\n}\n\nvoid deleteAccount(String name) {\n  if (activeRole != Role.admin) {\n    throw UnauthorizedException('Only admin can delete account');\n  }\n  // ...\n}\n\nvoid main() {\n  try {\n    deleteAccount('user');\n  } on UnauthorizedException catch (e) {\n    // Handle the exception.\n  }\n}",
+      "badCode": "void deleteAccount(String name) {\n  if (activeRole != Role.admin) {\n    throw Exception('Only admin can delete account');\n  }\n  // ...\n}\n\nvoid main() {\n  try {\n    deleteAccount('user');\n  } on Exception catch (e) {\n    // Exception is a marker interface implemented by all core library exceptions.\n    // It is very generic, potentially catching many different types of exceptions,\n    // lacking intent, and making the code harder to understand.\n  }\n}"
     }
   ]
 }
