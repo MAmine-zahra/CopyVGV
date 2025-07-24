@@ -1,11 +1,11 @@
-class BackendArchitectureModel {
+class DataJsonModel {
   String? mainTitle;
   List<Content>? content;
 
-  BackendArchitectureModel({this.mainTitle, this.content});
+  DataJsonModel({this.mainTitle, this.content});
 
-  factory BackendArchitectureModel.fromJson(Map<String, dynamic> json) {
-    return BackendArchitectureModel(
+  factory DataJsonModel.fromJson(Map<String, dynamic> json) {
+    return DataJsonModel(
       mainTitle: json['mainTitle'] as String?,
       content: (json['content'] as List<dynamic>?)
           ?.map((item) => Content.fromJson(item as Map<String, dynamic>))
@@ -29,8 +29,11 @@ class Content {
   String? note;
   List<String>? notePoints;
   String? image;
+  String? code2;
+  String? goodCode;
+  String? badCode;
 
-  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image});
+  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image, this.code2, this.goodCode, this.badCode});
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
@@ -45,6 +48,9 @@ class Content {
           ? List<String>.from(json['notePoints'] as List)
           : null,
       image: json['image'] as String?,
+      code2: json['code2'] as String?,
+      goodCode: json ['goodCode'] as String?,
+      badCode: json ['badCode'] as String?,
     );
   }
 
@@ -58,6 +64,9 @@ class Content {
       'note': note,
       'notePoints': notePoints,
       'image':image,
+      'code2': code2,
+      'goodCode': goodCode,
+      'badCode': badCode,
     };
   }
 }

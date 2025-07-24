@@ -57,6 +57,7 @@ flutter:
     - assets/images/
     - assets/data/backend_architecture_data.json
     - assets/data/architecture_data.json
+    - assets/data/error_handling_data.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

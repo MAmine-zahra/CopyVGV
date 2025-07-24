@@ -20,7 +20,7 @@ class TextTitle extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Backend Architecture',
+              text,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 42,

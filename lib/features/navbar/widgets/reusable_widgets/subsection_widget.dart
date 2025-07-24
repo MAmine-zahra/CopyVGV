@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/toggle_code_block.dart';
 
 import 'code_widget.dart';
 import 'image_widget.dart';
@@ -13,6 +14,8 @@ class SubsectionWidget extends StatelessWidget {
   final String? note;
   final List<String>? notePoints;
   final String? image;
+  final String? goodCode;
+  final String? badCode;
 
   const SubsectionWidget({
     super.key,
@@ -23,6 +26,8 @@ class SubsectionWidget extends StatelessWidget {
     this.note,
     this.notePoints,
     this.image,
+    this.goodCode,
+    this.badCode,
   });
 
   @override
@@ -45,6 +50,7 @@ class SubsectionWidget extends StatelessWidget {
         code == null ? SizedBox.shrink() : CodeBlock(code: code!),
         note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? []),
         image == null ? SizedBox.shrink() : ImageWidget(image: image!),
+        goodCode == null ? SizedBox.shrink() : ToggleCodeBlock(goodCode: goodCode!, badCode: badCode!),
       ],
     );
   }

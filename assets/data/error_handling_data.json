@@ -1,0 +1,18 @@
+{
+  "mainTitle": "Error Handling",
+  "content": [
+    {
+      "type": "subtitle",
+      "text": "Document when a call may throw"
+    },
+    {
+      "type": "text",
+      "text": "Document exceptions associated with calling a function in its documentation comments to help understand when an exception might be thrown.\n\nProperly documenting possible exceptions allows developers to handle exceptions, leading to more robust and error-resistant code and reducing the likelihood of unintended errors."
+    },
+    {
+      "type": "code2",
+      "goodCode": "/// Permanently deletes an account with the given [name].\n///\n/// Throws:\n///\n/// * [UnauthorizedException] if the active role is not [Role.admin], since only\n///  admins are authorized to delete accounts.\nvoid deleteAccount(String name) {\n  if (activeRole != Role.admin) {\n    throw UnauthorizedException('Only admin can delete account');\n  }\n  // ...\n}",
+      "badCode": "/// Permanently deletes an account with the given [name].\nvoid deleteAccount(String name) {\n  if (activeRole != Role.admin) {\n    throw UnauthorizedException('Only admin can delete account');\n  }\n  // ...\n}"
+    }
+  ]
+}

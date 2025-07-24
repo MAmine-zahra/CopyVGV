@@ -27,7 +27,6 @@ class _ToggleCodeBlockState extends State<ToggleCodeBlock> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Toggle Header
         Row(
           children: [
             ChoiceChip(

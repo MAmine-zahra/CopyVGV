@@ -9,12 +9,12 @@ import 'folder_structure.dart';
 class Architecture extends StatelessWidget {
   const Architecture({super.key});
 
-  Future<BackendArchitectureModel> loadJsonData() async {
+  Future<DataJsonModel> loadJsonData() async {
     final String response = await rootBundle.loadString(
       'assets/data/architecture_data.json',
     );
     final Map<String, dynamic> jsonData = json.decode(response);
-    return BackendArchitectureModel.fromJson(jsonData);
+    return DataJsonModel.fromJson(jsonData);
   }
 
   @override
