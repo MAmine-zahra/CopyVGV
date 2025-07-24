@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../reusable_widgets/tree_view.dart';
+import 'tree_view.dart';
 
 //Architecture TreeView
 class ArchFolderStructureWidget extends StatelessWidget {

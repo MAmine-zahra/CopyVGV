@@ -140,10 +140,10 @@ class CustomNavbar extends StatelessWidget {
             ),
             SideMainItem(
               icon: errorHandling,
-              title: "error_handling",
+              title: "Error Handling",
               childrens: [
                 SideSubItem(
-                  title: "error_handling",
+                  title: "Error Handling",
                   onTap: () =>
                       onItemSelected?.call(const ErrorHandlingContent()),
                 ),
@@ -186,7 +186,7 @@ class CustomNavbar extends StatelessWidget {
             ),
             SideMainItem(
               icon: navigation,
-              title: "navigation",
+              title: "Navigation",
               childrens: [
                 SideSubItem(
                   title: "Routing Overview",

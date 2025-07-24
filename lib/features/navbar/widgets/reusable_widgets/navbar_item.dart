@@ -112,7 +112,7 @@ class HomeButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(4.0),
           ),
           width: 300,
-          child: Center( // <-- Center the text
+          child: Center(
             child: Text(
               title,
               style: TextStyle(

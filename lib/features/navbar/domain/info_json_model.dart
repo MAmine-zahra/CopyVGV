@@ -32,8 +32,11 @@ class Content {
   String? code2;
   String? goodCode;
   String? badCode;
+  String? imperative;
+  String? declarative;
+  String? caution;
 
-  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image, this.code2, this.goodCode, this.badCode});
+  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image, this.code2, this.goodCode, this.badCode, this.imperative, this.declarative, this.caution});
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
@@ -51,6 +54,9 @@ class Content {
       code2: json['code2'] as String?,
       goodCode: json ['goodCode'] as String?,
       badCode: json ['badCode'] as String?,
+      imperative: json ['imperative'] as String?,
+      declarative: json ['declarative'] as String?,
+      caution: json ['caution'] as String?,
     );
   }
 
@@ -67,6 +73,9 @@ class Content {
       'code2': code2,
       'goodCode': goodCode,
       'badCode': badCode,
+      'imperative': imperative,
+      'declarative': declarative,
+      'caution': caution,
     };
   }
 }

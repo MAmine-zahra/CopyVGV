@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/subsection_widget.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
 import '../../domain/info_json_model.dart';
-import '../architecture/folder_structure.dart';
+import '../reusable_widgets/folder_structure.dart';
 
 class ErrorHandlingContent extends StatelessWidget {
   const ErrorHandlingContent({super.key});

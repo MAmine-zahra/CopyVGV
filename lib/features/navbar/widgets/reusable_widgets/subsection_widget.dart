@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/declarative_imperative_code.dart';
 import 'package:new_app/features/navbar/widgets/reusable_widgets/toggle_code_block.dart';
 
+import 'caution_widget.dart';
 import 'code_widget.dart';
 import 'image_widget.dart';
 import 'note_widget.dart';
@@ -16,6 +18,9 @@ class SubsectionWidget extends StatelessWidget {
   final String? image;
   final String? goodCode;
   final String? badCode;
+  final String? caution;
+  final String? imperativeCode;
+  final String? declarativeCode;
 
   const SubsectionWidget({
     super.key,
@@ -28,6 +33,9 @@ class SubsectionWidget extends StatelessWidget {
     this.image,
     this.goodCode,
     this.badCode,
+    this.caution,
+    this.imperativeCode,
+    this.declarativeCode,
   });
 
   @override
@@ -51,6 +59,8 @@ class SubsectionWidget extends StatelessWidget {
         note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? []),
         image == null ? SizedBox.shrink() : ImageWidget(image: image!),
         goodCode == null ? SizedBox.shrink() : ToggleCodeBlock(goodCode: goodCode!, badCode: badCode!),
+        imperativeCode == null ? SizedBox.shrink() : ImpDecCodeBlock(imperative: imperativeCode!, declarative: declarativeCode!),
+        caution == null ? SizedBox.shrink() : CautionWidget(note: caution!),
       ],
     );
   }
