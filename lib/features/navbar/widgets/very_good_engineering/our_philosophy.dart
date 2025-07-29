@@ -50,7 +50,7 @@ class OurPhilosophy extends StatelessWidget {
                 case "code":
                   return SubsectionWidget(code: item.code ?? '_');
                 case "note":
-                  return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? []);
+                  return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? [], code: item.code ?? '_');
                 case "code3":
                   return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_');
                 default:

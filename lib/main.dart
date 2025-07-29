@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Container(
-            width: 500,
+            width: 400,
             decoration: BoxDecoration(
                 border: Border(
                     left: BorderSide(color: Color.fromARGB(255, 50, 56, 70))

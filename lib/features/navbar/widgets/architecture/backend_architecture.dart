@@ -50,7 +50,7 @@ class ArchitectureContent extends StatelessWidget {
                 case "code":
                   return SubsectionWidget(code: item.code ?? '_');
                 case "note":
-                  return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? []);
+                  return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? [], code: item.code ?? '',);
                 default:
                   return const SizedBox.shrink();
               }

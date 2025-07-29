@@ -35,8 +35,9 @@ class Content {
   String? imperative;
   String? declarative;
   String? caution;
+  String? tip;
 
-  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image, this.code2, this.goodCode, this.badCode, this.imperative, this.declarative, this.caution});
+  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image, this.code2, this.goodCode, this.badCode, this.imperative, this.declarative, this.caution, this.tip,});
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
@@ -57,6 +58,7 @@ class Content {
       imperative: json ['imperative'] as String?,
       declarative: json ['declarative'] as String?,
       caution: json ['caution'] as String?,
+      tip: json ['tip'] as String?,
     );
   }
 
@@ -76,6 +78,7 @@ class Content {
       'imperative': imperative,
       'declarative': declarative,
       'caution': caution,
+      'tip': tip,
     };
   }
 }

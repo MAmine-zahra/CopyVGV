@@ -50,7 +50,7 @@ class ErrorHandlingContent extends StatelessWidget {
                 case "code":
                   return SubsectionWidget(code: item.code ?? '_');
                 case "note":
-                  return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? []);
+                  return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? [], code: item.code ?? '');
                 case "code2":
                   return SubsectionWidget(goodCode: item.goodCode ?? '_', badCode: item.badCode ?? '_');
                 default:

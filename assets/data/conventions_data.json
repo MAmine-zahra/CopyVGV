@@ -1,0 +1,20 @@
+{
+  "mainTitle" : "Conventions",
+  "content": [
+    {
+      "type": "text",
+      "text": "There are a handful of external development standards and conventions that we encourage developers to familiarize themselves with.\n\n"
+    },
+    {
+      "type": "bulletPoints",
+      "points": [
+        "\uD83D\uDCC4 Diátaxis — a systematic approach to technical documentation authoring.",
+        "\uD83C\uDF8E Semantic Versioning — a versioning scheme for software.",
+        "\uD83D\uDCA0 Conventional Commits — a specification for adding human and machine readable meaning to commit messages.",
+        "\uD83E\uDEB5 Keep a Changelog — a specification for maintaining a changelog.",
+        "\uD83E\uDDCA Opinionated “Recommended” Practices for flutter_bloc",
+        "\uD83E\uDD1D Contributor Covenant —  code of conduct designed to promote a welcoming and inclusive community."
+      ]
+    }
+  ]
+}

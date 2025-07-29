@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/Features/navbar/widgets/reusable_widgets/text_placers.dart';
 import 'package:new_app/features/navbar/widgets/reusable_widgets/declarative_imperative_code.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/tip_widget.dart';
 import 'package:new_app/features/navbar/widgets/reusable_widgets/toggle_code_block.dart';
 
 import 'caution_widget.dart';
@@ -21,6 +22,7 @@ class SubsectionWidget extends StatelessWidget {
   final String? caution;
   final String? imperativeCode;
   final String? declarativeCode;
+  final String? tip;
 
   const SubsectionWidget({
     super.key,
@@ -36,6 +38,7 @@ class SubsectionWidget extends StatelessWidget {
     this.caution,
     this.imperativeCode,
     this.declarativeCode,
+    this.tip,
   });
 
   @override
@@ -56,11 +59,12 @@ class SubsectionWidget extends StatelessWidget {
             ? SizedBox.shrink()
             : ContentBulletPoints(points: bulletPoints ?? []),
         code == null ? SizedBox.shrink() : CodeBlock(code: code!),
-        note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? []),
+        note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? [], code: code!),
         image == null ? SizedBox.shrink() : ImageWidget(image: image!),
         goodCode == null ? SizedBox.shrink() : ToggleCodeBlock(goodCode: goodCode!, badCode: badCode!),
         imperativeCode == null ? SizedBox.shrink() : ImpDecCodeBlock(imperative: imperativeCode!, declarative: declarativeCode!),
         caution == null ? SizedBox.shrink() : CautionWidget(note: caution!),
+        tip == null ? SizedBox.shrink() : TipWidget(tip: tip!, code: code!),
       ],
     );
   }

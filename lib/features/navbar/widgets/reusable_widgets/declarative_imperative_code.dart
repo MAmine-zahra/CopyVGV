@@ -36,7 +36,7 @@ class _ToggleCodeBlockState extends State<ImpDecCodeBlock> {
           child: Row(
             children: [
               ChoiceChip(
-                label: const Text('Declarative'),
+                label: const Text('Declarative',),
                 selected: showDec,
                 onSelected: (_) => setState(() => showDec = true),
                 selectedColor: Colors.transparent,
