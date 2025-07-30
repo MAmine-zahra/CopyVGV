@@ -51,6 +51,8 @@ class OurPhilosophy extends StatelessWidget {
                   return SubsectionWidget(code: item.code ?? '_');
                 case "note":
                   return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? [], noteCode: item.code ?? '_');
+                case "spacer":
+                  return const SizedBox(height: 16);
                 case "code3":
                   return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_');
                 default:

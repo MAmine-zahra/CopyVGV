@@ -51,6 +51,8 @@ class Credits extends StatelessWidget {
                   return SubsectionWidget(code: item.code ?? '_');
                 case "note":
                   return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? [], noteCode: item.code ?? '',);
+                case "spacer":
+                  return const SizedBox(height: 16);
                 case "code3":
                   return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_');
                 case "tip":

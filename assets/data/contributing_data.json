@@ -7,7 +7,7 @@
     },
     {
       "type": "text",
-      "text": "We welcome (and encourage) contributions to Very Good Engineering!\n\nSince this is an Astro static website with the Starlight theme, you’ll need to make sure you’ve installed NVM and the latest stable version of Node.js.\n\n"
+      "text": "We welcome (and encourage) contributions to Very Good Engineering!\n\nSince this is an Astro static website with the Starlight theme, you’ll need to make sure you’ve installed NVM and the latest stable version of Node.js.\n"
     },
     {
       "type": "subtitle",

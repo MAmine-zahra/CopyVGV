@@ -41,6 +41,8 @@ class Architecture extends StatelessWidget {
               switch (item.type) {
                 case "image":
                   return SubsectionWidget(image: item.image ?? '_');
+                case "spacer":
+                  return const SizedBox(height: 16);
                 case "subtitle":
                   return SubsectionWidget(subtitle: item.text ?? '_');
                 case "text":

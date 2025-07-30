@@ -43,6 +43,8 @@ class Services extends StatelessWidget {
                   return SubsectionWidget(textItems: [item.text ?? '_']);
                 case "bulletPoints":
                   return SubsectionWidget(bulletPoints: item.points ?? []);
+                case "spacer":
+                  return const SizedBox(height: 16);
                 default:
                   return const SizedBox.shrink();
               }

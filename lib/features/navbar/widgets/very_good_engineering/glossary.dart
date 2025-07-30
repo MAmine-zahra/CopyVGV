@@ -53,6 +53,8 @@ class Glossary extends StatelessWidget {
                   return SubsectionWidget(note: item.note ?? '_', notePoints : item.notePoints ?? [], noteCode: item.code ?? '_',);
                 case "code3":
                   return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_');
+                case "spacer":
+                  return const SizedBox(height: 16);
                 case "tip":
                   return SubsectionWidget(tip: item.tip ?? '_', code: item.code ?? '_');
                 default:

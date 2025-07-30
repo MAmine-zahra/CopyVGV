@@ -7,7 +7,11 @@ class CautionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 238 , 189, 83),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 74 , 64, 34),
+        border: Border(
+        left: BorderSide(color: Color.fromARGB(255, 198, 189, 83), width: 4),
+      ),),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

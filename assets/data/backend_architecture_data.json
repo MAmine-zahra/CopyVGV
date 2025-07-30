@@ -55,8 +55,7 @@
       "code": "final class GetTodosResponse {\n  const GetTodosResponse({\n    int count = 0,\n    int pageNumber = 0,\n    List<Todos> todos = const [],\n  });\n  final int count;\n  final int pageNumber;\n  final List<Todos> todos;\n}"
     },
     {
-      "type": "text",
-      "text": " "
+      "type": "spacer"
     },
     {
       "type": "note",
@@ -183,16 +182,14 @@
       "code": "final todo = context.read<TodosDataSource>().get(id);\n\nif (todo == null) {\n  return Response(statusCode: HttpStatus.notFound, body: 'No todo exists with the given $id');\n}"
     },
     {
-      "type": "text",
-      "text": " "
+      "type": "spacer"
     },
     {
       "type": "code",
       "code": "late final requestBody;\ntry {\n  requestBody = CreateTodoRequest.fromJson(jsonDecode(await context.request.body() as Map));\n} catch (e) {\n  return Response(statusCode: HttpStatus.badRequest, body: 'Invalid request: $e');\n}"
     },
     {
-      "type": "text",
-      "text": " "
+      "type": "spacer"
     },
     {
       "type": "code",

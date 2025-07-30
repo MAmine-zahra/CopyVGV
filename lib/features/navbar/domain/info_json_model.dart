@@ -36,6 +36,7 @@ class Content {
   String? declarative;
   String? caution;
   String? tip;
+  String? struct;
 
   Content({
     this.type,
@@ -52,6 +53,7 @@ class Content {
     this.declarative,
     this.caution,
     this.tip,
+    this.struct,
   });
 
   factory Content.fromJson(Map<String, dynamic> json) {
@@ -74,6 +76,8 @@ class Content {
       declarative: json['declarative'] as String?,
       caution: json['caution'] as String?,
       tip: json['tip'] as String?,
+      struct: json['struct'] as String?,
+
     );
   }
 
@@ -93,6 +97,7 @@ class Content {
       'declarative': declarative,
       'caution': caution,
       'tip': tip,
+      'struct':struct,
     };
   }
 }

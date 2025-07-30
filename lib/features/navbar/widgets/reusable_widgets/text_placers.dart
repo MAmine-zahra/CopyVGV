@@ -100,7 +100,7 @@ class ContentText extends StatelessWidget {
   const ContentText({
     super.key,
     required this.text,
-    this.padding = const EdgeInsets.only(bottom: 12),
+    this.padding = const EdgeInsets.only(top: 12,bottom: 12),
   });
 
   @override

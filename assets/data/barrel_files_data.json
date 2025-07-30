@@ -1,0 +1,110 @@
+{
+  "mainTitle": "Barrel Files",
+  "content": [
+    {
+      "type": "text",
+      "text": "When building a package, a feature, or an API, we will create a folder structure with all the source code inside. If we stop here and don’t export the files that will be required in other places of the app, we will force developers to have a long and messy import section. Furthermore, any refactor that affects file names in one feature will require changes in other places that could be avoided.\n\nFor a package, the structure could look something like:"
+    },
+    {
+      "type": "folderStructure",
+      "struct": "packageStruct"
+    },
+    {
+      "type": "text",
+      "text": "And for a feature, it could look like:"
+    },
+    {
+      "type": "folderStructure",
+      "struct": "featureStruct"
+    },
+    {
+      "type": "text",
+      "text": "In both cases, if we want to use both widget_1.dart and widget_2.dart in other parts of the app, we will have to import them separately like:"
+    },
+    {
+      "type": "code",
+      "code": "import 'package:my_package/lib/src/widgets/widget_1';\nimport 'package:my_package/lib/src/widgets/widget_2';"
+    },
+    {
+      "type": "text",
+      "text": "In the case of a refactor, updating all those imports is inefficient. Barrel files help solve this problem.\n"
+    },
+    {
+      "type": "subtitle",
+      "text": "Barrel Files"
+    },
+    {
+      "type": "text",
+      "text": "Barrel files are responsible for exporting other public facing files that should be made available to the rest of the app.\n\nIt is recommended to create one barrel file per folder, exporting all files from that folder that could be required elsewhere. You should also have a top level barrel file to export the package as a whole.\n\nWith these changes, let’s update the folder structures for both scenarios.\n\nA package with barrel files should look like:"
+    },
+    {
+      "type": "folderStructure",
+      "struct": "packageBarrelStruct"
+    },
+    {
+      "type": "text",
+      "text": "And a feature with barrel files should look like:"
+    },
+    {
+      "type": "folderStructure",
+      "struct": "featureBarrelStruct"
+    },
+    {
+      "type": "text",
+      "text": "Finally let’s see what these files contain. Continuing with the package example, we have three barrel files: models.dart, widgets.dart and my_package.dart.\n"
+    },
+    {
+      "type": "text",
+      "text": "models.dart"
+    },
+    {
+      "type": "code",
+      "code": "export 'model_1.dart';\nexport 'model_2.dart';"
+    },
+    {
+      "type": "text",
+      "text": "widgets.dart"
+    },
+    {
+      "type": "code",
+      "code": "export 'widget_1.dart';\nexport 'widget_2.dart';"
+    },
+    {
+      "type": "text",
+      "text": "my_package.dart"
+    },
+    {
+      "type": "code",
+      "code": "export 'models.dart';\nexport 'widgets.dart';"
+    },
+    {
+      "type": "spacer"
+    },
+    {
+      "type": "caution",
+      "caution": "In this example, we are exporting all files from the folder, but this is not always the case. If the model_2.dart uses the model_1.dart inside, but model_1.dart is not intended to be imported by the public, it should not be exported in the barrel file.\n"
+    },
+    {
+      "type": "subtitle",
+      "text": "Bloc and barrel files"
+    },
+    {
+      "type": "text",
+      "text": "By convention, blocs are typically broken into separate files consisting of the events, states, and the bloc itself:\n"
+    },
+    {
+      "type": "folderStructure",
+      "struct": "blocStruct"
+    },
+    {
+      "type": "text",
+      "text": "In this case, we don’t add an extra barrel file since the feature_bloc.dart file is working as such, thanks to the part of directives. You can read more about it in the bloc documentation.\n"
+    },
+    {
+      "type": "tip",
+      "tip": "When working with barrel files, it might be a bit tedious to export every file manually. There is a handy VSCode extension that allows you to export all files in a folder or export a file by adding it to the barrel file."
+    }
+
+
+  ]
+}

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import 'tree_view.dart';
@@ -8,7 +9,7 @@ class ArchFolderStructureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 33, 38, 51),
+      color: const Color.fromARGB(255, 1, 22, 39),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -232,6 +233,150 @@ class BackArchFolderStructureWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class BarrelFilesPackageStructWidget extends StatelessWidget{
+  const BarrelFilesPackageStructWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 1, 22, 39),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FolderWidget(name: "my_package/",children: [
+            FolderWidget(name: "lib/",children: [
+              FolderWidget(name: "src/",children: [
+                FolderWidget(name: "models/",children: [
+                  FileWidget(name: "model_1.dart"),
+                  FileWidget(name: "model_2.dart"),
+                ],),
+                FolderWidget(name: "widgets/",children: [
+                  FileWidget(name: "widget_1.dart"),
+                  FileWidget(name: "widget_2.dart"),
+                ],)
+              ],)
+            ],),
+            FolderWidget(name: "test/",children: [],),
+            FileWidget(name: "pubspec.yaml")
+          ],)
+        ],
+      ),
+    );
+  }
+}
+
+class BarrelFilesFeatureStructWidget extends StatelessWidget{
+  const BarrelFilesFeatureStructWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 1, 22, 39),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FolderWidget(name: "my_feature/",children: [
+            FolderWidget(name: "bloc/",children: [
+              FileWidget(name: "feature_bloc.dart"),
+              FileWidget(name: "feature_event.dart"),
+              FileWidget(name: "feature_state.dart"),
+            ],),
+            FolderWidget(name: "view/",children: [
+              FileWidget(name: "feature_page.dart"),
+              FileWidget(name: "feature_view.dart"),
+            ],),
+            FolderWidget(name: "widgets/",children: [
+              FileWidget(name: "widget_1.dart"),
+              FileWidget(name: "widget_2.dart"),
+            ],)
+          ],)
+        ],
+      )
+    );
+  }
+}
+
+class BarrelFilesPackageBarrelStructWidget extends StatelessWidget {
+  const BarrelFilesPackageBarrelStructWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 1, 22, 39),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FolderWidget(name: "my_package/",children: [
+            FolderWidget(name: "lib/",children: [
+              FolderWidget(name: "src/",children: [
+                FolderWidget(name: "models/",children: [
+                  FileWidget(name: "model_1.dart"),
+                  FileWidget(name: "model_2.dart"),
+                  FileWidget(name: "model_3.dart")
+                ],),
+                FolderWidget(name: "widgets/",children: [
+                  FileWidget(name: "widget_1.dart"),
+                  FileWidget(name: "widget_2.dart"),
+                  FileWidget(name: "widget_3.dart")
+                ],),
+                FileWidget(name: "my_package.dart")
+              ],)
+            ],),
+            FolderWidget(name: "test/",children: [],),
+            FileWidget(name: "pubspec.yaml")
+          ],)
+        ],
+      ),
+    );
+  }
+
+}
+
+
+class BarrelFilesFeatureBarrelStructWidget extends StatelessWidget {
+  const BarrelFilesFeatureBarrelStructWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 1, 22, 39),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FolderWidget(name: "my_feature/",children: [
+        FolderWidget(name: "bloc/",children: [
+          FileWidget(name: "feature_bloc.dart"),
+          FileWidget(name: "feature_event.dart"),
+          FileWidget(name: "feature_state.dart"),
+        ],),
+        FolderWidget(name: "view/",children: [
+          FileWidget(name: "feature_page.dart"),
+          FileWidget(name: "feature_view.dart"),
+        ],),
+            FileWidget(name: "my_feature.dart")
+        ])
+        ]
+      )
+    );
+  }
+}
+
+class BarrelFilesBlocStructWidget extends StatelessWidget{
+  const BarrelFilesBlocStructWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 1, 22, 39),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FolderWidget(name: "bloc/",children: [
+            FileWidget(name: "feature_bloc.dart"),
+            FileWidget(name: "feature_event.dart"),
+            FileWidget(name: "feature_state.dart"),
+          ],)
+        ]
+      )
     );
   }
 }

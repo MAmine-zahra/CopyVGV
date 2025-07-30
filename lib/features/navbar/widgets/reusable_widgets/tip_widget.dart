@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'subsection_widget.dart' ;
 class TipWidget extends StatelessWidget {
   final String tip;
   final String code;
@@ -7,7 +6,11 @@ class TipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 189 , 83, 238),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 64 , 34, 78),
+        border: Border(
+          left: BorderSide(color: Color.fromARGB(255, 189, 83, 238), width: 4),
+        ),),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -34,7 +37,6 @@ class TipWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            SubsectionWidget(code: code ,)
           ],
         ),
       ),

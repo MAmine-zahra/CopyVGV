@@ -10,7 +10,11 @@ class NoteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 23, 29, 79),
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 23, 29, 79),
+        border: Border(
+          left: BorderSide(color: Color.fromARGB(255, 51, 71, 255), width: 4),
+        ),),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -20,7 +24,7 @@ class NoteWidget extends StatelessWidget {
               child: Text(
                 'Note:',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 189, 195, 255),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

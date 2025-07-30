@@ -55,6 +55,8 @@ class Contributing extends StatelessWidget {
                   return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_');
                 case "tip":
                   return SubsectionWidget(tip: item.tip ?? '_', code: item.code ?? '');
+                case "spacer":
+                  return const SizedBox(height: 16);
                 default:
                   return const SizedBox.shrink();
               }
