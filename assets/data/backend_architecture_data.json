@@ -55,6 +55,10 @@
       "code": "final class GetTodosResponse {\n  const GetTodosResponse({\n    int count = 0,\n    int pageNumber = 0,\n    List<Todos> todos = const [],\n  });\n  final int count;\n  final int pageNumber;\n  final List<Todos> todos;\n}"
     },
     {
+      "type": "text",
+      "text": " "
+    },
+    {
       "type": "note",
       "note": "It is also advisable to automate JSON serialization inside the models package. This can be achieved with the json_serializable package, though experimental macros in Dart offer a potentially cleaner way of doing this in the future."
     },

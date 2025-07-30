@@ -37,7 +37,22 @@ class Content {
   String? caution;
   String? tip;
 
-  Content({this.type, this.text, this.points, this.code, this.note, this.notePoints, this.image, this.code2, this.goodCode, this.badCode, this.imperative, this.declarative, this.caution, this.tip,});
+  Content({
+    this.type,
+    this.text,
+    this.points,
+    this.code,
+    this.note,
+    this.notePoints,
+    this.image,
+    this.code2,
+    this.goodCode,
+    this.badCode,
+    this.imperative,
+    this.declarative,
+    this.caution,
+    this.tip,
+  });
 
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
@@ -53,15 +68,14 @@ class Content {
           : null,
       image: json['image'] as String?,
       code2: json['code2'] as String?,
-      goodCode: json ['goodCode'] as String?,
-      badCode: json ['badCode'] as String?,
-      imperative: json ['imperative'] as String?,
-      declarative: json ['declarative'] as String?,
-      caution: json ['caution'] as String?,
-      tip: json ['tip'] as String?,
+      goodCode: json['goodCode'] as String?,
+      badCode: json['badCode'] as String?,
+      imperative: json['imperative'] as String?,
+      declarative: json['declarative'] as String?,
+      caution: json['caution'] as String?,
+      tip: json['tip'] as String?,
     );
   }
-
 
   Map<String, dynamic> toJson() {
     return {
@@ -71,7 +85,7 @@ class Content {
       'code': code,
       'note': note,
       'notePoints': notePoints,
-      'image':image,
+      'image': image,
       'code2': code2,
       'goodCode': goodCode,
       'badCode': badCode,

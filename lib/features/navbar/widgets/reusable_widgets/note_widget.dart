@@ -4,9 +4,9 @@ import 'package:new_app/Features/navbar/widgets/reusable_widgets/subsection_widg
 class NoteWidget extends StatelessWidget {
   final String note;
   final List<String> bulletPoints;
-  final String code;
+  final String? code;
 
-  const NoteWidget({super.key, required this.note,required this.bulletPoints, required this.code,});
+  const NoteWidget({super.key, required this.note,required this.bulletPoints, required this.code});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,7 +55,7 @@ class NoteWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8,),
-            code == '' ? const SizedBox.shrink() : SubsectionWidget(code: code ,)
+             code == '' ? const SizedBox.shrink() : SubsectionWidget(code: code ,)
           ],
         ),
       ),

@@ -1,0 +1,30 @@
+{
+  "mainTitle": "Credits",
+  "content": [
+    {
+      "type": "text",
+      "text": "Made possible by the following oper source projects:"
+    },
+    {
+      "type": "bulletPoints",
+      "points":[
+        "Astro",
+        "Starlight",
+        "NVM",
+        "Node.js"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Our landing page graphic combines several wonderful, free assets:"
+    },
+    {
+      "type": "bulletPoints",
+      "points": [
+        "Smartphone",
+        "Laptop",
+        "Unicorn"
+      ]
+    }
+  ]
+}

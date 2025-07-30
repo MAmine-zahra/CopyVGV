@@ -8,8 +8,7 @@ class ArchFolderStructureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 1, 22, 39),
-
+      color: Color.fromARGB(255, 33, 38, 51),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

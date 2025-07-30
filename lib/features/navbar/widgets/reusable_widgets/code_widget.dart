@@ -18,7 +18,7 @@ class CodeBlock extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(12),
-      color: const Color(0xFF011627), // dark background
+      color: Color.fromARGB(255, 33, 38, 51),
       width: double.infinity,
       child: SelectableText.rich(
         TextSpan(

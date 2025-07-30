@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 33, 38, 51),
+      backgroundColor: const Color.fromARGB(255, 1, 22, 39),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(4.0),
@@ -92,14 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: Container(
               padding: EdgeInsets.only(left: 200),
-              color: Color.fromARGB(255, 33, 38, 51),
+              color: Color.fromARGB(255, 1, 22, 39),
               child: _currentContent is WelcomeContent
                 ? WelcomeContent(onItemSelected: _updateContent)
                 : _currentContent,
             ),
           ),
           Container(
-            width: 400,
+            width: 300,
             decoration: BoxDecoration(
                 border: Border(
                     left: BorderSide(color: Color.fromARGB(255, 50, 56, 70))
