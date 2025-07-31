@@ -15,7 +15,8 @@ class TextTitle extends StatelessWidget {
       ),
       width: double.infinity,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -40,17 +41,15 @@ class TextTitle extends StatelessWidget {
 class ContentPage extends StatelessWidget {
   final String mainTitle;
   final List<Widget> contentChildren;
-  final EdgeInsetsGeometry padding;
   const ContentPage({
     super.key,
     required this.mainTitle,
     required this.contentChildren,
-    this.padding = const EdgeInsets.all(24),
   });
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -67,18 +66,16 @@ class ContentPage extends StatelessWidget {
 
 class ContentSubtitle extends StatelessWidget {
   final String text;
-  final EdgeInsetsGeometry padding;
 
   const ContentSubtitle({
     super.key,
     required this.text,
-    this.padding = const EdgeInsets.only(top: 16, bottom: 8),
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: const EdgeInsets.only(top: 16, bottom: 8),
       child: Text(
         text,
         style: const TextStyle(
@@ -100,7 +97,7 @@ class ContentText extends StatelessWidget {
   const ContentText({
     super.key,
     required this.text,
-    this.padding = const EdgeInsets.only(top: 12,bottom: 12),
+    this.padding = const EdgeInsets.all(8),
   });
 
   @override
