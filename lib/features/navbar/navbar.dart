@@ -9,7 +9,7 @@ import 'package:new_app/Features/navbar/widgets/documentation/documentation.dart
 import 'package:new_app/Features/navbar/widgets/error_handling/error_handling.dart';
 import 'package:new_app/Features/navbar/widgets/examples/airplane_entertainment_system.dart';
 import 'package:new_app/Features/navbar/widgets/examples/financial_dashboard.dart';
-import 'package:new_app/Features/navbar/widgets/examples/vehicule_cockpit.dart';
+import 'package:new_app/Features/navbar/widgets/examples/vehicle_cockpit.dart';
 import 'package:new_app/Features/navbar/widgets/internalization/localization.dart';
 import 'package:new_app/Features/navbar/widgets/internalization/text_directionality.dart';
 import 'package:new_app/Features/navbar/widgets/navigation/routing_overview.dart';
@@ -163,8 +163,8 @@ class CustomNavbar extends StatelessWidget {
                   onTap: () => onItemSelected?.call(const FinancialDashboard()),
                 ),
                 SideSubItem(
-                  title: "Vehicule Cockpit",
-                  onTap: () => onItemSelected?.call(const VehiculeCockpit()),
+                  title: "Vehicle Cockpit",
+                  onTap: () => onItemSelected?.call(const VehicleCockpit()),
                 ),
               ],
             ),
