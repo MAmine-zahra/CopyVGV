@@ -105,7 +105,7 @@
     {
       "type": "tip",
       "tip": "If you find yourself repeating AppLocalizations.of(context) many times and find it cumbersome, you can create an extension to make it easier to access the localized strings:",
-      "tipCode": "extension AppLocalizationsX on BuildContext {\n  AppLocalizations get l10n => AppLocalizations.of(this);\n}"
+      "code": "extension AppLocalizationsX on BuildContext {\n  AppLocalizations get l10n => AppLocalizations.of(this);\n}"
     },
     {
       "type": "text",
