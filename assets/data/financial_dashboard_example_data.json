@@ -1,0 +1,73 @@
+{
+  "mainTitle": "Financial Dashboard",
+  "content": [
+    {
+      "type": "text",
+      "text": "The Financial Dashboard simulates a budgeting app with mocked data that showcases different themes, interactive graphs and UI animations when updating the data."
+    },
+    {
+      "type": "image",
+      "image": "assets/images/financial_dashboard.png"
+    },
+    {
+      "type": "text",
+      "text": "The source code for this project is available on GitHub. To view the live demo, click here."
+    },
+    {
+      "type": "subtitle",
+      "text": "Architecture"
+    },
+    {
+      "type": "text",
+      "text": "The Financial Dashboard is a simple demo managed by two state handlers, a Flavor Cubit to control which theme is shown, and a Financial Data Bloc that is responsible for generating random financial data. We will take a look into how both work together to update the theme and the data."
+    },
+    {
+      "type": "subtitle",
+      "text": "Theming"
+    },
+    {
+      "type": "text",
+      "text": "The theme in the app consists of a new color palette and a different widget layout. With this in mind, we cannot just update the ThemeData in the MaterialApp widget, but we handle the feature with a FlavorCubit.\n\nIt is a simple cubit that emits the selected flavor when the corresponding button is tapped."
+    },
+    {
+      "type": "code",
+      "code": "class FlavorCubit extends Cubit<AppFlavor> {\n  FlavorCubit() : super(AppFlavor.one);\n\n  void select(AppFlavor flavor) => emit(flavor);\n}"
+    },
+    {
+      "type": "text",
+      "text": "And rebuilds the appropriate page with a BlocBuilder."
+    },
+    {
+      "type": "code",
+      "code": "BlocBuilder<FlavorCubit, AppFlavor>(\n  builder: (context, state) {\n    return switch (state) {\n      AppFlavor.one => DeviceFrame(\n          lightTheme: const FlavorOneTheme().themeData,\n          darkTheme: const FlavorOneDarkTheme().themeData,\n          child: const AppOne(),\n        ),\n      AppFlavor.two => DeviceFrame(\n          lightTheme: const FlavorTwoTheme().themeData,\n          darkTheme: const FlavorTwoDarkTheme().themeData,\n          child: const AppTwo(),\n        ),\n      AppFlavor.three => DeviceFrame(\n          lightTheme: const FlavorThreeTheme().themeData,\n          darkTheme: const FlavorThreeDarkTheme().themeData,\n          child: const AppThree(),\n        ),\n    };\n  },\n)"
+    },
+    {
+      "type": "subtitle",
+      "text": "Financial Data"
+    },
+    {
+      "type": "text",
+      "text": "The example data in the app is randomized on launch and every time the user pulls to refresh. This is handled by a FinancialDataBloc that creates random data with a set of constraints.\n\nIn addition, when generating new data, the text and the graphs are animated."
+    },
+    {
+      "type": "text",
+      "text": "GIF ANIMATION"
+    },
+    {
+      "type": "text",
+      "text": "To achieve this, we divided each piece of data in a different widget so it can be reused. For each widget that needs animation, we defined both a controller and an animation. To make the first animation when the widget is loaded, we set the controller and run it in the initState."
+    },
+    {
+      "type": "code",
+      "code": "  late AnimationController _controller;\n  late Animation<double> _animation;\n\n  @override\n  void initState() {\n    super.initState();\n\n    _controller = AnimationController(\n      duration: const Duration(seconds: 1),\n      vsync: this,\n    );\n\n    final state = context.read<FinancialDataBloc>().state;\n    _animation = Tween<double>(begin: 0, end: state.currentSavings).animate(\n      _controller,\n    );\n    _controller.forward();\n  }"
+    },
+    {
+      "type": "text",
+      "text": "But that wouldn’t be sufficient if we also want to animate the data when the user pulls to refresh. To power that feature, we used a BlocListener that waits for a change in the corresponding data to reset and run the animation controller again."
+    },
+    {
+      "type": "code",
+      "code": "BlocListener<FinancialDataBloc, FinancialDataState>(\n  listenWhen: (previous, current) =>\n      previous.currentSavings != current.currentSavings,\n  listener: (context, state) {\n    _animation = Tween<double>(begin: 0, end: state.currentSavings).animate(\n      _controller,\n    );\n    _controller\n      ..reset()\n      ..forward();\n  },\n  child: ...,\n)"
+    }
+  ]
+}

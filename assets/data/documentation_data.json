@@ -1,0 +1,18 @@
+{
+  "mainTitle": "Documentation",
+  "content": [
+    {
+      "type": "subtitle",
+      "text": "Explicitly document no operations"
+    },
+    {
+      "type": "text",
+      "text": "On occasions, some code might simply do nothing at all, these scenarios are usually referred to as no operations (no-op). The reasons for the need to introduce a no-op may vary. For example, it could well be due to the need to align with an interface.\n\nLeaving the no-operation without an explanatory comment may cause engineers to doubt whether the code was left uncompleted intentionally or not. If there is a need for a no-op, document its existence."
+    },
+    {
+      "type": "code2",
+      "goodCode": "class BluetoothProcessor extends NetworkProcessor {\n  @override\n  void abort() {\n      // Intentional no-op, an abort in Bluetooth has no resources to clean.\n  }\n}",
+      "badCode": "class BluetoothProcessor extends NetworkProcessor {\n  @override\n  void abort() {}\n}"
+    }
+  ]
+}
