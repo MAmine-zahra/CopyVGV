@@ -54,7 +54,7 @@ class OurPhilosophy extends StatelessWidget {
                 case "spacer":
                   return const SizedBox(height: 16);
                 case "code3":
-                  return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_');
+                  return SubsectionWidget(imperativeCode: item.imperative ?? '_', declarativeCode: item.declarative ?? '_', decLabel: item.decLabel ?? 'Declarative', impLabel: item.impLabel ?? 'Imperative',);
                 default:
                   return const SizedBox.shrink();
               }

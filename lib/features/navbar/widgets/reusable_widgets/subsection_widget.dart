@@ -26,6 +26,8 @@ class SubsectionWidget extends StatelessWidget {
   final String? noteCode;
   final String? tipCode;
   final String? spacer;
+  final String? decLabel;
+  final String? impLabel;
 
   const SubsectionWidget({
     super.key,
@@ -45,6 +47,8 @@ class SubsectionWidget extends StatelessWidget {
     this.noteCode,
     this.tipCode,
     this.spacer,
+    this.decLabel,
+    this.impLabel,
   });
 
   @override
@@ -68,7 +72,7 @@ class SubsectionWidget extends StatelessWidget {
         note == null ? SizedBox.shrink() : NoteWidget(note: note!, bulletPoints: notePoints ?? [], code: noteCode!,),
         image == null ? SizedBox.shrink() : ImageWidget(image: image!),
         goodCode == null ? SizedBox.shrink() : ToggleCodeBlock(goodCode: goodCode!, badCode: badCode!),
-        imperativeCode == null ? SizedBox.shrink() : ImpDecCodeBlock(imperative: imperativeCode!, declarative: declarativeCode!),
+        imperativeCode == null ? SizedBox.shrink() : ImpDecCodeBlock(imperative: imperativeCode!, declarative: declarativeCode!, impLabel: impLabel!, decLabel: decLabel!,),
         caution == null ? SizedBox.shrink() : CautionWidget(note: caution!),
         tip == null ? SizedBox.shrink() : TipWidget(tip: tip!, code: tipCode!),
       ],

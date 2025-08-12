@@ -37,6 +37,8 @@ class Content {
   String? caution;
   String? tip;
   String? struct;
+  String? decLabel;
+  String? impLabel;
 
   Content({
     this.type,
@@ -54,6 +56,8 @@ class Content {
     this.caution,
     this.tip,
     this.struct,
+    this.decLabel,
+    this.impLabel,
   });
 
   factory Content.fromJson(Map<String, dynamic> json) {
@@ -77,8 +81,10 @@ class Content {
       caution: json['caution'] as String?,
       tip: json['tip'] as String?,
       struct: json['struct'] as String?,
-
+      decLabel: json['decLabel'] as String?,
+      impLabel: json['impLabel'] as String?,
     );
+
   }
 
   Map<String, dynamic> toJson() {
@@ -98,6 +104,9 @@ class Content {
       'caution': caution,
       'tip': tip,
       'struct':struct,
+      'decLabel': decLabel,
+      'impLabel': impLabel,
+
     };
   }
 }

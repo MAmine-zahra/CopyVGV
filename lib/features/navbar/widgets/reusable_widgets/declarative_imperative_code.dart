@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-
 import 'code_widget.dart';
 
 class ImpDecCodeBlock extends StatefulWidget {
   final String declarative;
   final String imperative;
   final String language;
+  final String decLabel; // New parameter for declarative label
+  final String impLabel; // New parameter for imperative label
 
   const ImpDecCodeBlock({
     super.key,
     required this.declarative,
     required this.imperative,
     this.language = 'dart',
+    this.decLabel = 'Declarative', // Default value
+    this.impLabel = 'Imperative',  // Default value
   });
 
   @override
@@ -26,9 +29,8 @@ class _ToggleCodeBlockState extends State<ImpDecCodeBlock> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border(
               bottom: BorderSide(color: Color.fromARGB(255, 50, 56, 70), width: 3),
             ),
@@ -36,14 +38,14 @@ class _ToggleCodeBlockState extends State<ImpDecCodeBlock> {
           child: Row(
             children: [
               ChoiceChip(
-                label: const Text('Declarative',),
+                label: Text(widget.decLabel),
                 selected: showDec,
                 onSelected: (_) => setState(() => showDec = true),
                 selectedColor: Colors.transparent,
               ),
               const SizedBox(width: 3),
               ChoiceChip(
-                label: const Text('Imperative'),
+                label: Text(widget.impLabel),
                 selected: !showDec,
                 onSelected: (_) => setState(() => showDec = false),
                 selectedColor: Colors.transparent,
