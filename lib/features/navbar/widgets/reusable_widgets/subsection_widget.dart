@@ -4,10 +4,11 @@ import 'package:new_app/features/navbar/widgets/reusable_widgets/declarative_imp
 import 'package:new_app/features/navbar/widgets/reusable_widgets/tip_widget.dart';
 import 'package:new_app/features/navbar/widgets/reusable_widgets/toggle_code_block.dart';
 
-import 'caution_widget.dart';
-import 'code_widget.dart';
-import 'image_widget.dart';
-import 'note_widget.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/caution_widget.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/code_widget.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/danger_widget.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/image_widget.dart';
+import 'package:new_app/features/navbar/widgets/reusable_widgets/note_widget.dart';
 
 class SubsectionWidget extends StatelessWidget {
   final String? subtitle;
@@ -28,6 +29,8 @@ class SubsectionWidget extends StatelessWidget {
   final String? spacer;
   final String? decLabel;
   final String? impLabel;
+  final String? danger;
+  final List<String>? tipPoints;
 
   const SubsectionWidget({
     super.key,
@@ -49,6 +52,8 @@ class SubsectionWidget extends StatelessWidget {
     this.spacer,
     this.decLabel,
     this.impLabel,
+    this.danger,
+    this.tipPoints,
   });
 
   @override
@@ -74,7 +79,8 @@ class SubsectionWidget extends StatelessWidget {
         goodCode == null ? SizedBox.shrink() : ToggleCodeBlock(goodCode: goodCode!, badCode: badCode!),
         imperativeCode == null ? SizedBox.shrink() : ImpDecCodeBlock(imperative: imperativeCode!, declarative: declarativeCode!, impLabel: impLabel!, decLabel: decLabel!,),
         caution == null ? SizedBox.shrink() : CautionWidget(note: caution!),
-        tip == null ? SizedBox.shrink() : TipWidget(tip: tip!, code: tipCode!),
+        tip == null ? SizedBox.shrink() : TipWidget(tip: tip!, code: tipCode!, bulletPoints: tipPoints ?? []),
+        danger == null ? SizedBox.shrink() : DangerWidget(danger: danger!),
       ],
     );
   }

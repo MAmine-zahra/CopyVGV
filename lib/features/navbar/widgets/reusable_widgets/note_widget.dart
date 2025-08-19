@@ -22,7 +22,7 @@ class NoteWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Note:',
+                'Note',
                 style: TextStyle(
                   color: Color.fromARGB(255, 189, 195, 255),
                   fontSize: 18,

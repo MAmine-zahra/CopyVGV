@@ -5,16 +5,16 @@ class ImpDecCodeBlock extends StatefulWidget {
   final String declarative;
   final String imperative;
   final String language;
-  final String decLabel; // New parameter for declarative label
-  final String impLabel; // New parameter for imperative label
+  final String decLabel;
+  final String impLabel;
 
   const ImpDecCodeBlock({
     super.key,
     required this.declarative,
     required this.imperative,
     this.language = 'dart',
-    this.decLabel = 'Declarative', // Default value
-    this.impLabel = 'Imperative',  // Default value
+    this.decLabel = 'Declarative',
+    this.impLabel = 'Imperative',
   });
 
   @override
