@@ -1,0 +1,150 @@
+{
+  "mainTitle": "Bloc Event Transformers",
+  "content": [
+    {
+      "type": "text",
+      "text": "Since Bloc v.7.2.0, events are handled concurrently by default. This allows event handler instances to execute simultaneously and provides no guarantees regarding the order of handler completion.\n\nConcurrent event handling is often desirable, but issues ranging from performance degradation to serious data and behavior defects can emerge if your specified event transformer diverges from the needs of your state management system.\n\nIn particular, race conditions can produce bugs when the result of operations varies with their order of execution."
+    },
+    {
+      "type": "subtitle",
+      "text": "Registering Event Transformers"
+    },
+    {
+      "type": "text",
+      "text": "Event transformers are specified in the transformer field of the event registration functions in the Bloc constructor:"
+    },
+    {
+      "type": "code",
+      "code": "class MyBloc extends Bloc<MyEvent, MyState> {\n  MyBloc() : super(MyState()) {\n    on<MyEvent>(\n      _onEvent,\n      transformer: mySequentialTransformer(),\n    )\n    on<MySecondEvent>(\n      _onSecondEvent,\n      transformer: mySequentialTransformer(),\n    )\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "Each on<E> statement creates a bucket for handling events of type E."
+    },
+    {
+      "type": "note",
+      "note": "Note that event transformers are only applied within the bucket they are specified in. In the above example, only events of the same type (two of MyEvent or two MySecondEvent) would be processed sequentially, while a MyEvent and a MySecondEvent would be processed concurrently."
+    },
+    {
+      "type": "text",
+      "text": "If you would like to enforce a global transformer scheme across event types, Joanna May’s article “How to Use Bloc With Streams and Concurrency” provides a concise guide."
+    },
+    {
+      "type": "subtitle",
+      "text": "Transformer Types"
+    },
+    {
+      "type": "text",
+      "text": "The Bloc Event Transformer API allows you to implement custom event transformers, but the bloc_concurrency package furnishes several out-of-the box transformers which cover a wide range of use cases. These include:"
+    },
+    {
+      "type": "bulletPoints",
+      "points": [
+        "concurrent (default)",
+        "sequential",
+        "droppable",
+        "restartable"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "Let’s investigate the sequential, droppable, and restartable transformers and look at how they’re used."
+    },
+    {
+      "type": "subtitle",
+      "text": "Sequential"
+    },
+    {
+      "type": "text",
+      "text": "The sequential transformer ensures that events are handled one at a time, in a first in, first out order from when they are received."
+    },
+    {
+      "type": "code",
+      "code": "class MyBloc extends Bloc<MyEvent, MyState> {\n  MyBloc() : super(MyState()) {\n    on<MyEvent>(\n      _onEvent,\n      transformer: sequential(),\n    )\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "To illustrate the utility of sequential event handling, suppose we’re building a money-tracking app. The _onChangeBalance handler first calls an API to read our current account balance, and then sends a call to update the balance to its new value:"
+    },
+    {
+      "type": "code",
+      "code": "class MoneyBloc extends Bloc<MoneyEvent, MoneyState> {\n  MoneyBloc() : super(MoneyState()) {\n    on<ChangeBalance>(_onChangeBalance, transformer: concurrent());\n  }\n\n  Future<void> _onChangeBalance(\n    ChangeBalance event,\n    Emitter<MoneyState> emit,\n  ) async {\n    final balance = await api.readBalance();\n    await api.setBalance(balance + event.add);\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "We then quickly add two events ChangeBalance(add: 20) and ChangeBalance(add: 40), which will be handled concurrently. A possible sequence of events is:"
+    },
+    {
+      "type": "bulletPoints",
+      "points": [
+        "The first ChangeBalance handler instance will read a balance of $100, and send a not-yet-received request to the API to update the balance to $120.",
+        "Before the first handler finishes its execution, the second handler executes, reads the old account value of $100, and completes an API request to update the balance to $140.",
+        "Finally, the first handler’s call to update the balance reaches the API, and the balance is now overwritten to $120."
+      ]
+    },
+    {
+      "type": "text",
+      "text": "This example illustrates the issues that can arise from concurrent handling of operations. Had we used a sequential transformer for the ChangeBalance event handler and ensured that the first addition of $20 had completed before processing the next event, we wouldn’t have lost $40.\n\nNote that when operations are safe to execute concurrently, using a sequential transformer can introduce unnecessary latency into event handling."
+    },
+    {
+      "type": "subtitle",
+      "text": "Droppable"
+    },
+    {
+      "type": "text",
+      "text": "The droppable transformer will discard any events that are added while an event in that bucket is already being processed."
+    },
+    {
+      "type": "code",
+      "code": "class SayHiBloc extends Bloc<SayHiEvent, SayHiState> {\n  SayHiBloc() : super(SayHiState()) {\n    on<SayHello>(\n      _onSayHello,\n      transformer: droppable(),\n    )\n  }\n\n  Future<void> _onSayHello(\n    SayHello event,\n    Emitter<SayHiState> emit,\n  ) async {\n    await api.say(\"Hello!\");\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "In the above example, we’d like to avoid clogging up our API with unnecessary duplicate greetings. The droppable transformer will ensure that additional SayHello events added while the first _onSayHello instance is executing will be discarded and never executed.\n\nSince events added during ongoing handling will be discarded by the droppable transformer, ensure that you’re OK with any data stored in that event being lost."
+    },
+    {
+      "type": "subtitle",
+      "text": "Restartable"
+    },
+    {
+      "type": "text",
+      "text": "The restartable transformer inverts the behavior of droppable, halting execution of previous event handlers in order to process the most recently received event."
+    },
+    {
+      "type": "code",
+      "code": "class ThoughtBloc extends Bloc<ThoughtEvent, ThoughtState> {\n  ThoughtBloc() : super(ThoughtState()) {\n    on<ThoughtEvent>(\n      _onThought,\n      transformer: restartable(),\n    )\n  }\n\n  Future<void> _onThought(\n    ThoughtEvent event,\n    Emitter<ThoughtState> emit,\n  ) async {\n    await api.record(event.thought);\n    emit(\n      state.copyWith(\n        message: 'This is my most recent thought: ${event.thought}',\n      )\n    );\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "If we want to avoid emitting the declaration that ${event.thought} is my most recent thought when the bloc has received an even more recent thought, the restartable transformer will suspend _onThought’s processing of the outdated event if a more recent event is received during its execution."
+    },
+    {
+      "type": "subtitle",
+      "text": "Testing Blocs"
+    },
+    {
+      "type": "text",
+      "text": "When writing tests for a bloc, you may encounter an issue where a variable event handling order is acceptable in use, but the inconsistent sequence of event execution makes the determined order of states required by blocTest’s expect field results in unpredictable test behavior:"
+    },
+    {
+      "type": "code",
+      "code": "blocTest<MyBloc, MyState>(\n  'change value',\n  build: () => MyBloc(),\n  act: (bloc) {\n    bloc.add(ChangeValue(add: 1));\n    bloc.add(ChangeValue(remove: 1));\n  },\n  expect: () => const [\n    MyState(value: 1),\n    MyState(value: 0),\n  ],\n);"
+    },
+    {
+      "type": "text",
+      "text": "If the ChangeValue(remove: 1) event completes execution before ChangeValue(add: 1) has finished, the resultant states will instead be MyState(value: -1),MyState(value: 0), causing the test to fail.\n\nUtilizing a await Future<void>.delayed(Duration.zero) statement in the act function will ensure that the task queue is empty before additional events are added:"
+    },
+    {
+      "type": "code",
+      "code": "blocTest<MyBloc, MyState>(\n  'change value',\n  build: () => MyBloc(),\n  act: (bloc) {\n    bloc.add(ChangeValue(add: 1));\n    await Future<void>.delayed(Duration.zero);\n    bloc.add(ChangeValue(remove: 1));\n  },\n  expect: () => const [\n    MyState(value: 1),\n    MyState(value: 0),\n  ],\n);"
+    },
+    {
+      "type": "subtitle",
+      "text": "Conclusion"
+    },
+    {
+      "type": "text",
+      "text": "bloc_concurrency provides several event transformers to ensure that your bloc handles events in a manner that’s conducive to the goals of your state management system. If concurrent, sequential, droppable, or restartable are insufficient for your purposes (for example if you would like a custom debouncing interval), you can always implement a custom EventTransformer"
+    }
+  ]
+}
