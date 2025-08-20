@@ -1,0 +1,157 @@
+{
+  "mainTitle": "State Handling",
+  "content": [
+    {
+      "type": "text",
+      "text": "To enum or to sealed class? That is the question we’ll be discussing in this episode of Very Good Engineering \uD83E\uDD84, to understand which way to go when declaring states for our Cubits/Blocs.\n\n\uD83D\uDCA1 Either one of these options could be the right one depending on the following use cases."
+    },
+    {
+      "type": "subtitle",
+      "text": "Do I want to persist previous data when emitting a new state?"
+    },
+    {
+      "type": "text",
+      "text": "As it happens when filling out a form where data is updated step by step, or when the state has several values that are loaded independently, if your aim is to update new fields of the state or the state itself without losing previously emitted data, using a single class with an enum as the state’s ‘status’ it’s the easiest way to go.\n\n\uD83D\uDCA1 You can also share properties throughout all the states by setting those inside the parent sealed or abstract class.\n\nThis can look something like:"
+    },
+    {
+      "type": "code",
+      "code": "initial state\n        |----> update property 1\n            |----> update property 2\n                  |----> update property 3\n                        |----> submit form\n                                  |----> success state\n                                  |----> failure state"
+    },
+    {
+      "type": "text",
+      "text": "Let’s see an example:"
+    },
+    {
+      "type": "code",
+      "code": "enum CreateAccountStatus {\n  initial,\n  loading,\n  success,\n  failure,\n}\n\nclass CreateAccountState extends Equatable {\n  const CreateAccountState({\n    this.status = CreateAccountStatus.initial,\n    this.name,\n    this.surname,\n    this.email,\n  });\n\n  final CreateAccountStatus status;\n  final String? name;\n  final String? surname;\n  final String? email;\n\n  CreateAccountState copyWith({\n    CreateAccountStatus? status,\n    String? name,\n    String? surname,\n    String? email,\n  }) {\n    return CreateAccountState(\n      status: status ?? this.status,\n      name: name ?? this.name,\n      surname: surname ?? this.surname,\n      email: email ?? this.email,\n    );\n  }\n\n  // Getter to check whether every field has valid data.\n  bool get isValid => name.isNotNullOrEmpty\n      && surname.isNotNullOrEmpty\n      && email.isNotNullOrEmpty\n      && email.isValid;\n\n  @override\n  List<Object> get props => [\n    status,\n    name,\n    surname,\n    email,\n  ];\n}"
+    },
+    {
+      "type": "text",
+      "text": "As you can see above, because the user is going to fill out their name, surname, and email, and any of them can be null or empty at any time, we need to make sure we have data in each property as per our business logic before allowing the user to create their account.\n\n\uD83D\uDCA1 Using enums to handle status is useful in cases like this where there are several steps for the user to fill up information and the data emitted in previous steps should not be lost in newer emits.\n\nTake a look at the Cubit example for this implementation:"
+    },
+    {
+      "type": "code",
+      "code": "class CreateAccountCubit extends Cubit<CreateAccountState> {\n  CreateAccountCubit(): super(const CreateAccountState());\n\n  void updateName(String name) {\n    // We emit the name without losing any other data.\n    emit(state.copyWith(name: name));\n  }\n\n  void updateSurname(String surname) {\n    // We emit the surname without losing any other data.\n    emit(state.copyWith(surname: surname));\n  }\n\n  void updateEmail(String email) {\n    // We emit the email without losing any other data.\n    emit(state.copyWith(email: email));\n  }\n\n  // ... other update methods here.\n\n  Future<void> createAccount() async {\n    emit(state.copyWith(status: CreateAccountStatus.loading));\n    try {\n      // Double check the current state is valid.\n      if (state.isValid) {\n        emit(state.copyWith(status: CreateAccountStatus.success));\n      } else {\n        emit(state.copyWith(status: CreateAccountStatus.failure));\n      }\n    } catch (e, s) {\n      addError(e, s);\n      // We can emit the failure without losing the content that\n      // was added by the user.\n      emit(state.copyWith(status: CreateAccountStatus.failure));\n    }\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "As you can see, having a single state class with an enum for the status helps to keep the information that was added previously.\n\nLet’s see how we consume these types of states in the UI using the BlocListener widget."
+    },
+    {
+      "type": "code",
+      "code": "class CreateAccountPage extends StatelessWidget {\n  const CreateAccountPage({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return const Scaffold(\n      body: BlocListener<CreateAccountCubit, CreateAccountState>(\n        listener: (context, state) {\n          // This is how we check for the actual status.\n          if (state.status == CreateAccountStatus.failure) {\n            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(\n                backgroundColor: Colors.red,\n                content: Text('Something went wrong')));\n          }\n          if (state.status == CreateAccountStatus.success) {\n            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(\n                backgroundColor: Colors.green,\n                content: Text('Account created!')));\n          }\n        },\n        child: CreateAccountFormView(),\n      ),\n    );\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "As seen above, with this approach, the current status comes from the status enum property inside the cubit state.\n\nLet’s now check the other way to handle states."
+    },
+    {
+      "type": "subtitle",
+      "text": "Do I want to emit a fresh state every time?"
+    },
+    {
+      "type": "text",
+      "text": "The other side of the state management aims for clean state updates, isolating the properties of each state that’s emitted. This is useful for when the data being fetched is not going to change, or for instance, we don’t need to keep it in future emits, and it’s a matter of simply:"
+    },
+    {
+      "type": "code",
+      "code": "loading ---->   <try fetch data>    |----> success (data fetched)\n                                    |----> failure"
+    },
+    {
+      "type": "text",
+      "text": "This can be achieved by leveraging the use of sealed classes (when in Flutter 3.13+) or basic abstract classes (when in older Flutter versions)."
+    },
+    {
+      "type": "subtitle",
+      "text": "Using sealed classes"
+    },
+    {
+      "type": "text",
+      "text": "Let’s see how the states are built:"
+    },
+    {
+      "type": "code",
+      "code": "// Using sealed classes.\nsealed class ProfileState {}\n\nclass ProfileLoading extends ProfileState {}\n\nclass ProfileSuccess extends ProfileState {\n  ProfileSuccess(this.profile);\n\n  final Profile profile;\n}\n\nclass ProfileFailure extends ProfileState {\n  ProfileFailure(this.errorMessage);\n\n  final String errorMessage;\n}"
+    },
+    {
+      "type": "text",
+      "text": "As you can see, each state holds its own data, and it’s properly isolated from one another.\n\nLet’s now see how to treat this state in the Cubit:"
+    },
+    {
+      "type": "code",
+      "code": "class ProfileCubit extends Cubit<ProfileState> {\n  ProfileCubit() : super(ProfileLoading()) {\n    getProfileDetails();\n  }\n\n  Future<void> getProfileDetails() async {\n    try {\n      await Future.delayed(const Duration(seconds: 3), () {});\n\n      final data = Profile(\n        name: 'Pepe',\n        surname: 'Martinez',\n        email: 'pepe@gmail.com',\n      );\n\n      emit(ProfileSuccess(data));\n    } catch (e) {\n      // We can emit the failure without losing the content that was\n      // added by the user.\n      emit(ProfileFailure(\n          'Oops, could not load your profile. Please try again later.'));\n    }\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "And now let’s consume that Cubit from the UI:"
+    },
+    {
+      "type": "code",
+      "code": "class ProfilePage extends StatelessWidget {\n  const ProfilePage({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n      body: BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {\n        // Leverage the usage of switch statements.\n        return switch (state) {\n          ProfileLoading() => const _ProgressIndicator(),\n          // 'success' here is the same state value casted as a ProfileSuccess.\n          ProfileSuccess success => ProfileView(success.profile),\n          // Here we get the message property from the ProfileFailure state.\n          ProfileFailure(errorMessage: final message) => Text(message),\n        };\n      }),\n    );\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "As you can see, sealed classes helps us to properly isolate data inside each state, and whenever we check we are in a certain state we are sure that the data won’t be null at all, as it happens when dealing with enum states."
+    },
+    {
+      "type": "subtitle",
+      "text": "Using abstract classes"
+    },
+    {
+      "type": "code",
+      "code": "// Using abstract classes.\nabstract class ProfileState {}\n\nclass ProfileLoading extends ProfileState {}\n\nclass ProfileSuccess extends ProfileState {\n  ProfileSuccess(this.profile);\n\n  final Profile profile;\n}\n\nclass ProfileFailure extends ProfileState {\n  ProfileFailure(this.errorMessage);\n\n  final String errorMessage;\n}"
+    },
+    {
+      "type": "text",
+      "text": "The Cubit class doesn’t change at all:"
+    },
+    {
+      "type": "code",
+      "code": "class ProfileCubit extends Cubit<ProfileState> {\n  ProfileCubit() : super(ProfileLoading()) {\n    getProfileDetails();\n  }\n\n  Future<void> getProfileDetails() async {\n    try {\n      await Future.delayed(const Duration(seconds: 3), () {});\n\n      final data = Profile(\n        name: 'Pepe',\n        surname: 'Martinez',\n        email: 'pepe@gmail.com',\n      );\n\n      emit(ProfileSuccess(data));\n    } catch (e) {\n      // We can emit the failure without losing the content that was\n      // added by the user.\n      emit(ProfileFailure(\n          'Oops, could not load your profile. Please try again later.'));\n    }\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "But the way we consume states as classes differs:"
+    },
+    {
+      "type": "code",
+      "code": "class ProfilePage extends StatelessWidget {\n  const ProfilePage({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n      body: BlocBuilder<ProfileCubit, ProfileState>(\n        builder: (_, state) {\n          // Using normal Switch statement.\n          switch (state) {\n            case ProfileLoading():\n              return const _ProgressIndicator();\n            case ProfileSuccess():\n              // Properties have to be accessed by the state.\n              return ProfileView(state.profile);\n            case ProfileFailure():\n              return Text(state.errorMessage);\n            // Default case is mandatory.\n            default:\n              return const SizedBox.shrink();\n          }\n        },\n      ),\n    );\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "Here you can see that consuming states based on an abstract class is more painful than using sealed classes, but is still the way to go when the Flutter version is not up-to date and you would like to isolate each state."
+    },
+    {
+      "type": "subtitle",
+      "text": "Bonus - Share properties in some of the states (sealed or abstract classes)"
+    },
+    {
+      "type": "text",
+      "text": "You might be wondering… can I have the same property in more than one state and still continue to use sealed classes? Yes you can!\n\n\uD83D\uDCA1 You can also share properties throughout all the states by setting those inside the parent sealed or abstract class.\n\nLet’s look at an updated version of our state and cubit implementation using sealed classes (Pst! Same thing works for abstract classes as well):"
+    },
+    {
+      "type": "code",
+      "code": "sealed class ProfileState {}\n\nclass ProfileLoading extends ProfileState {}\n\nclass ProfileSuccess extends ProfileState {\n  ProfileSuccess(this.profile);\n\n  final Profile profile;\n}\n\nclass ProfileEditing extends ProfileState {\n  ProfileEditing(this.profile);\n\n  final Profile profile;\n}\n\nclass ProfileFailure extends ProfileState {\n  ProfileFailure(this.errorMessage);\n\n  final String errorMessage;\n}"
+    },
+    {
+      "type": "text",
+      "text": "As seen above, ProfileSuccess and ProfileEditing contains a Profile property inside. How can we handle that from inside the Cubit?"
+    },
+    {
+      "type": "code",
+      "code": "class ProfileCubit extends Cubit<ProfileState> {\n  ProfileCubit() : super(ProfileLoading()) {\n    getProfileDetails();\n  }\n\n  Future<void> getProfileDetails() async {\n    // Already seen.\n  }\n\n  Future<void> editName(String newName) async {\n    switch(state) {\n      // Here we get both Profile objects stored inside each state class\n      // and we're able to use it inside the block to update the profile.\n      case ProfileSuccess(profile: final prof):\n      case ProfileEditing(profile: final prof):\n        final newProfile = prof.copyWith(name: newName);\n        emit(ProfileSuccess(newProfile));\n      case ProfileLoading():\n      case ProfileFailure():\n        return;\n    }\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "This way you can be sure to handle all states in your Cubit methods and also be able to use the values contained.\n\nTo conclude this part, here’s also the way to do the same thing but UI side:"
+    },
+    {
+      "type": "code",
+      "code": "class ProfilePage extends StatelessWidget {\n  const ProfilePage({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n      body: BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {\n        // Leverage the usage of switch statements.\n        return switch (state) {\n          ProfileLoading() => const _ProgressIndicator(),\n          // We get the Profile prof by declaring a value based on the\n          // internal property of the state.\n          ProfileSuccess(profile: final prof)\n          || ProfileEditing(profile: final prof) => ProfileView(prof),\n          // Here we get the message property from the ProfileFailure state.\n          ProfileFailure(errorMessage: var message) => Text(message),\n        };\n      }),\n    );\n  }\n}"
+    },
+    {
+      "type": "text",
+      "text": "Hope this helps to get an idea about which route to take when designing states for your Cubits/Blocs.✨"
+    }
+  ]
+}
